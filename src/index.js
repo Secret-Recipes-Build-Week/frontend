@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux'; //*will need applyMiddleware when thunk is installed and imported
 
 //Components
 import App from "./App";

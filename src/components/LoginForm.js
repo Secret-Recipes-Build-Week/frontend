@@ -35,14 +35,14 @@ const labelStyleObject = {
 
 const inputStyleObject ={
     "margin": "0.5rem",
-    "background-color": "mistyrose"
+    "backgroundColor": "mistyrose"
 }
 
 const checkboxStyleObject = {
-    "text-align": "center",
+    "textAlign": "center",
     "margin": "1rem",
     "padding":"0.2rem",
-    "font-weight":"bold",
+    "fontWeight":"bold",
 
 }
 

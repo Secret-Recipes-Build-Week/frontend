@@ -3,7 +3,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import EditRecipe from "./components/EditRecipe";
-import Navtest from "./components/Navtest";
+import Nav from "./components/Nav/Nav";
+import AddRecipe from "./components/AddRecipe/AddRecipe";
 
 //components
 import PrivateRoute from "./components/PrivateRoute";
@@ -35,9 +36,10 @@ const initialValue = {
 const App = () => {
   return (
     <React.Fragment>
-      <Navtest />
+      <Nav />
       <Switch>
         <Route path="/edit" component={EditRecipe} />
+        <Route path="/add" component={AddRecipe} />
         <PrivateRoute
           path="/dash"
           component={Dashboard}

@@ -7,7 +7,6 @@ import Navtest from "./components/Navtest";
 
 //components
 import PrivateRoute from "./components/PrivateRoute";
-import TestComponent from "./components/testComponent/TestComponent";
 
 const initialValue = {
   title: "",

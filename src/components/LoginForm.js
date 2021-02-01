@@ -3,6 +3,53 @@ import styled from 'styled-components'
 import * as yup from "yup";
 import schema from "../validation/loginFormSchema"
 
+// ** STYLING RULES BEGIN HERE ** //
+
+const FormWrapper = styled.div`
+text-align: center;
+display: flex;
+flex-direction: column;
+border: 2px solid black;
+`
+
+const FormLabelWrapper = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+const FormHeaderWrapper = styled.header`
+background-color: blanchedalmond;
+padding: 0.5rem;
+border-bottom: 1px solid black;
+`
+
+const buttonStyleObject = {
+    "padding": "0.5rem",
+    "margin":"0.5rem"
+}
+
+const labelStyleObject = {
+    "margin": "0.5rem",
+    "padding": "1rem"
+}
+
+const inputStyleObject ={
+    "border": "3px solid black",
+    "margin": "0.5rem",
+    "background-color": "mistyrose"
+}
+
+const checkboxStyleObject = {
+    "text-align": "center",
+    "margin": "1rem",
+    "padding":"0.2rem",
+    "font-weight":"bold",
+
+}
+
+
+// ** COMPONENT LOGIC BEGINS HERE **//
+
 const initialFormValues = {
     email: "",
     password: "",
@@ -22,7 +69,7 @@ export default function LoginForm() {
     const [ disabled, setDisabled ] = useState(initialDisabled)
 
 
-    //** SUBMIT FUNCTIONS ** //
+    // ** SUBMIT FUNCTIONS START HERE ** //
 
 
     // Helper function. Empty shell for Axios call and state handlers. //
@@ -41,7 +88,8 @@ export default function LoginForm() {
         submit();
     };
 
-    //** CHANGE FUNCTIONS  ** //
+
+    // ** CHANGE FUNCTIONS START HERE  ** //
 
 
     // Function to update state with changed values. //
@@ -84,9 +132,12 @@ export default function LoginForm() {
 
 
     return (
+        <FormWrapper>
         <div className="form">
             <form onSubmit={onSubmit}>
-                <h1>Log in to access family secrets.</h1>
+                <FormHeaderWrapper>
+                <h1>Family Secrets: Login</h1>
+                </FormHeaderWrapper>
 
                 <div className="errors">
                     <div className="error">{errorValues.name}</div>
@@ -94,27 +145,34 @@ export default function LoginForm() {
                     <div className="error">{errorValues.email}</div>
                 </div>
 
-                <h3>Input Secrets.</h3>
-                <label className="label"> Email
+                <FormLabelWrapper>
+                <label className="label" style={labelStyleObject}> Email
                     <input
+                    style={inputStyleObject}
                     type="email"
                     onChange={onChange}
                     name="email"
                     value={formValues.email}
                     />
                 </label>
+                </FormLabelWrapper>
 
-                <label className="label"> Password
+                <FormLabelWrapper>
+                <label className="label" style={labelStyleObject}> Password
                     <input
+                    style={inputStyleObject}
                     type="password"
                     onChange={onChange}
                     name="password"
                     value={formValues.password}
                     />
                 </label>
+                </FormLabelWrapper>
 
-                <label className="label"> Remember me for next time.
+
+                <label className="label" style={checkboxStyleObject}> remember me
                     <input
+                    style={inputStyleObject}
                     type="checkbox"
                     onChange={onChange}
                     name="doRemember"
@@ -123,10 +181,12 @@ export default function LoginForm() {
                 </label>
 
 
-                
-                <button className="submit" disabled={disabled}>Submit</button>
+                <button style={buttonStyleObject} className="submit" disabled={disabled}>submit</button>
+
+
             </form>
             
         </div>
+        </FormWrapper>
     )
 }

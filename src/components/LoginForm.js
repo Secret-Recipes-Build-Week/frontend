@@ -34,7 +34,6 @@ const labelStyleObject = {
 }
 
 const inputStyleObject ={
-    "border": "3px solid black",
     "margin": "0.5rem",
     "background-color": "mistyrose"
 }

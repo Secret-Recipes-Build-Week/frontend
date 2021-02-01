@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+const initialValue = {
+  title: "",
+  categories: "",
+  instructions: [
+    {
+      step1: "",
+    },
+  ], //array of objects of steps?
+  ingredients: [
+    {
+      ingredient1: "",
+    },
+  ], //array of objects of ingredients?
+};
 
 export default function Dashboard() {
+  const [recipe, setRecipe] = useState(initialValue);
+  console.log(recipe);
+
   return (
     <div>
       <h1>Welcome User</h1>

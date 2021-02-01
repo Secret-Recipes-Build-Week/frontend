@@ -6,14 +6,18 @@ import {Route, Switch} from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import TestComponent from'./components/testComponent/TestComponent';
 import LoginForm from './components/LoginForm'
+import Nav from './components/Nav/Nav';
+import AddRecipe from './components/AddRecipe/AddRecipe';
+
 
 const App = () => {
   return (
     <div>
-      hello from App
+      <Nav/>
       <Switch>
-        <PrivateRoute path='/' component={TestComponent}/>
-        <Route path='/'/>
+        <PrivateRoute exact path='/' component={TestComponent}/>
+        {/* <Route path='/'/> */}
+        <Route path='/add' component={AddRecipe}/>
       </Switch>
       <LoginForm />
     </div>

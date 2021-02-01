@@ -1,23 +1,16 @@
 import React, { useState } from "react";
-const initialValue = {
-  title: "",
-  categories: "",
-  instructions: [
-    {
-      step1: "",
-    },
-  ], //array of objects of steps?
-  ingredients: [
-    {
-      ingredient1: "",
-    },
-  ], //array of objects of ingredients?
-};
+import { useHistory } from "react-router-dom";
+import EditRecipe from "./EditRecipe";
 
-export default function Dashboard() {
-  const [recipe, setRecipe] = useState(initialValue);
+export default function Dashboard(props) {
+  console.log(props);
+  const { push } = useHistory();
+  const [recipe, setRecipe] = useState(props.initialValue);
   console.log(recipe);
 
+  const handleEdit = () => {
+    push("/edit");
+  };
   return (
     <div>
       <h1>Welcome User</h1>
@@ -28,6 +21,8 @@ export default function Dashboard() {
       developer needs:
       ID for each for each recipe
       */}
+      {/* isLoggedIn true display edit form */}
+      <button onClick={handleEdit}>Edit</button>
     </div>
   );
 }

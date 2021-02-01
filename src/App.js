@@ -7,6 +7,9 @@ import Navtest from "./components/Navtest";
 
 //components
 import PrivateRoute from "./components/PrivateRoute";
+import Nav from './components/Nav/Nav';
+import AddRecipe from './components/AddRecipe/AddRecipe';
+
 
 const initialValue = {
   title: "",
@@ -35,7 +38,8 @@ const initialValue = {
 const App = () => {
   return (
     <React.Fragment>
-      <Navtest />
+     
+       <Nav/>
       <Switch>
         <Route path="/edit" component={EditRecipe} />
         <PrivateRoute
@@ -44,6 +48,10 @@ const App = () => {
           initialValue={initialValue}
         />
         <Route path="/" />
+       <Route path='/add' component={AddRecipe}/>
+
+    
+    
       </Switch>
     </React.Fragment>
   );

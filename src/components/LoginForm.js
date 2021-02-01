@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import * as yup from "yup";
 import schema from "../validation/loginFormSchema"

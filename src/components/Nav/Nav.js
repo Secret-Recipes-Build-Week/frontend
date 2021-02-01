@@ -13,27 +13,37 @@ const Nav = (props) => {
     }
   }, [isLoggedIn]);
 
+
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
-  const signoutHandler = () => { //Clicking the 'Sign out' button will delete token
-    localStorage.removeItem('token');
+  const signoutHandler = () => {
+    //Clicking the 'Sign out' button will delete token
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
-  }
-  const signInFAKEHandler = () => { //Clicking the 'sign in' button will create token
-    localStorage.setItem('token', 'testToken');
+  };
+  const signInFAKEHandler = () => {
+    //Clicking the 'sign in' button will create token
+    localStorage.setItem("token", "testToken");
     setIsLoggedIn(true);
-  }
+  };
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  const navItems = isLoggedIn
-    ? [
-        <NavLink to="/dashboard">Dashboard</NavLink>,
-        <NavLink to="/add">Add Recipe</NavLink>,
-        <NavLink to="/" onClick={signoutHandler}>Sign out</NavLink>,
-      ]
-    : [
-        <NavLink to="/signin" onClick={signInFAKEHandler}>Sign in</NavLink>,
-        <NavLink to="/signup">Sign up</NavLink>,
-      ];
+  
+  const navItems = isLoggedIn ? (
+    <div>
+      <NavLink to="/dashboard">Dashboard</NavLink>
+      <NavLink to="/add">Add Recipe</NavLink>
+      <NavLink to="/" onClick={signoutHandler}>
+        Sign out
+      </NavLink>
+    </div>
+  ) : (
+    <div>
+      <NavLink to="/signin" onClick={signInFAKEHandler}>
+        Sign in
+      </NavLink>
+      <NavLink to="/signup">Sign up</NavLink>
+    </div>
+  );
 
   return (
     <StyledNav>

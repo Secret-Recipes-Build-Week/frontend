@@ -1,5 +1,5 @@
-//exported as default, *not* a named export
-//remember to invoke axiosWithAuth() since it is a function before .get/post/put/delete
+//* exported as default, *not* a named export
+//* remember to invoke axiosWithAuth() since it is a function before .get/post/put/delete
 
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ const axiosWithAuth = () => {
     headers: {
       authorization: token,
     },
-    baseURL: '',
+    baseURL: '', //*add baseURL for endpoint
   })
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import EditRecipe from "./EditRecipe";
+// import EditRecipe from "./EditRecipe";
 
 export default function Dashboard(props) {
   console.log(props);
@@ -9,6 +9,7 @@ export default function Dashboard(props) {
   console.log(recipe);
 
   const handleEdit = () => {
+    setRecipe();
     push("/edit");
   };
   return (

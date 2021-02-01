@@ -16,6 +16,10 @@ const initialValue = {
       step: 3,
       text: "cut potatoes",
     },
+    {
+      step: 4,
+      text: "cut tomatoes",
+    },
   ], //array of objects of steps?
   ingredients: [
     {

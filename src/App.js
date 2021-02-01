@@ -1,21 +1,23 @@
 //packages
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Navtest from "./components/Navtest";
 
 //components
-import PrivateRoute from './components/PrivateRoute';
-import TestComponent from'./components/testComponent/TestComponent';
+import PrivateRoute from "./components/PrivateRoute";
+import TestComponent from "./components/testComponent/TestComponent";
 
 const App = () => {
   return (
-    <div>
-      hello from App
+    <React.Fragment>
+      <Navtest />
       <Switch>
-        <PrivateRoute path='/' component={TestComponent}/>
-        <Route path='/'/>
+        <PrivateRoute path="/dash" component={Dashboard} />
+        <Route path="/" />
       </Switch>
-    </div>
+    </React.Fragment>
   );
-}
+};
 
 export default App;

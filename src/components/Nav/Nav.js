@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StyledNav from "./StyledNav";
 import { NavLink } from "react-router-dom";
-
 const Nav = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -43,7 +42,7 @@ const Nav = (props) => {
 
   return (
     <StyledNav>
-      <div className="logo">logo?</div>
+      <div className="logo">logo</div>
       <div className="navItems">{navItems}</div>
     </StyledNav>
   );

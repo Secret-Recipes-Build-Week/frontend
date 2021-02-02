@@ -1,6 +1,10 @@
 export const initialValue = {
   title: "",
   categories: [],
+  keywords: "",
+  private: false,
+  createdBy: "",
+  source: "",
   instructions: [
     {
       step: 1,
@@ -17,7 +21,13 @@ export const initialValue = {
   ], //array of objects of steps?
   ingredients: [
     {
-      ingredient1: "",
+      ingredient: "2 white onions",
+    },
+    {
+      ingredient: "4 potattoes",
+    },
+    {
+      ingredient: "1 1/2 cup of milk",
     },
   ], //array of objects of ingredients?
 };

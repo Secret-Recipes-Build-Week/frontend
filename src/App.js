@@ -1,26 +1,32 @@
+//style reset
+import "./App.css";
+
 //packages
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 //components
 import PrivateRoute from "./components/PrivateRoute";
+import SignUpComponent from "./components/SignUpComponent";
 import LoginForm from "./components/LoginForm";
 import Nav from "./components/Nav/Nav";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
+import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Dashboard";
-import LandingPagetest from "./components/LandingPagetest";
 import EditRecipe from "./components/EditRecipe";
 
 const App = () => {
   return (
     <div>
       <Nav />
+
       <Switch>
+        <Route exact path="/" component={LandingPage} />
         <Route path="/edit" component={EditRecipe} />
-        <Route path="/add" component={AddRecipe} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/signin" component={LoginForm} />
-        <Route exact path="/" component={LandingPagetest} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignUpComponent} />
+        <PrivateRoute exact path="/add" component={AddRecipe} />
       </Switch>
     </div>
   );

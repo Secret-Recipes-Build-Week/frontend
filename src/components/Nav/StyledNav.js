@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledNav = styled.div`
-  /* height: 10vh; */
+  height: 5vh;
   background-color: #bbb;
   box-sizing: border-box;
   display: flex;

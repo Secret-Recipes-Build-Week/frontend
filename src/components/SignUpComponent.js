@@ -134,6 +134,7 @@ export default function SignUpComponent() {
               name="email"
               type="email"
               placeholder="Email"
+              autoComplete="username"
             />
           </label>
           <label>
@@ -144,6 +145,7 @@ export default function SignUpComponent() {
               name="password"
               type={passwordShown ? "text" : "password"}
               placeholder="Password"
+              autoComplete="new-password"
             />
           </label>
           <button onClick={togglePasswordVisibility}>Show</button>
@@ -155,6 +157,7 @@ export default function SignUpComponent() {
               name="confirmPassword"
               type={passwordShown ? "text" : "password"}
               placeholder="Confirm password"
+              autoComplete="new-password"
             />
           </label>
           <button onClick={togglePasswordVisibility}>Show</button>

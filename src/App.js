@@ -5,6 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 //components
 import PrivateRoute from './components/PrivateRoute';
 import TestComponent from'./components/testComponent/TestComponent';
+import SignUpComponent from './components/SignUpComponent';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <PrivateRoute path='/' component={TestComponent}/>
         <Route path='/'/>
       </Switch>
+      <SignUpComponent />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { initialValue } from "./initialValue";
 export default function Dashboard() {
   const { push } = useHistory();
   const [recipe, setRecipe] = useState(initialValue);
+  console.log(recipe);
   const handleEdit = () => {
     setRecipe();
     push("/edit");

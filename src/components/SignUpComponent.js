@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import * as yup from "yup";
@@ -101,7 +102,29 @@ export default function SignUpComponent() {
     const { name, value } = event.target;
     inputChange(name, value);
   };
-
+  //Styles
+  const Button = styled.button`
+    background-color: transparent;
+    border-radius: 0.35em;
+    border: solid 3px #efefef;
+    &:hover {
+      border-color: #49bf9d;
+      color: #49bf9d;
+    }
+    color: #787878;
+    cursor: pointer;
+    font-weight: 400;
+    height: calc(2.75em + 6px);
+    min-width: 10em;
+    padding: 0 1.5em;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    
+  `
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -148,7 +171,7 @@ export default function SignUpComponent() {
               autoComplete="new-password"
             />
           </label>
-          <button onClick={togglePasswordVisibility}>Show</button>
+          <Button onClick={togglePasswordVisibility}>Show</Button>
           <label>
             Confirm Password
             <input
@@ -160,10 +183,10 @@ export default function SignUpComponent() {
               autoComplete="new-password"
             />
           </label>
-          <button onClick={togglePasswordVisibility}>Show</button>
-          <button disabled={disabled} type="submit">
+          <Button onClick={togglePasswordVisibility}>Show</Button>
+          <Button disabled={disabled} type="submit">
             Submit
-          </button>
+          </Button>
           {/* Render form errors */}
           <div>
             <div>{formErrors.firstName}</div>

@@ -4,22 +4,24 @@ import { Route, Switch } from "react-router-dom";
 
 //components
 import PrivateRoute from "./components/PrivateRoute";
-import TestComponent from "./components/testComponent/TestComponent";
 import LoginForm from "./components/LoginForm";
 import Nav from "./components/Nav/Nav";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
 import Dashboard from "./components/Dashboard";
+import LandingPagetest from "./components/LandingPagetest";
+import EditRecipe from "./components/EditRecipe";
 
 const App = () => {
   return (
     <div>
       <Nav />
       <Switch>
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <Route path="/edit" component={EditRecipe} />
         <Route path="/add" component={AddRecipe} />
-        <PrivateRoute exact path="/" component={TestComponent} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/signin" component={LoginForm} />
+        <Route exact path="/" component={LandingPagetest} />
       </Switch>
-      <LoginForm />
     </div>
   );
 };

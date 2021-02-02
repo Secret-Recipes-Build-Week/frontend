@@ -13,7 +13,6 @@ const Nav = (props) => {
     }
   }, [isLoggedIn]);
 
-
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
   const signoutHandler = () => {
     //Clicking the 'Sign out' button will delete token
@@ -27,7 +26,6 @@ const Nav = (props) => {
   };
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  
   const navItems = isLoggedIn ? (
     <div>
       <NavLink to="/dashboard">Dashboard</NavLink>

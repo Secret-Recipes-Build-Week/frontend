@@ -22,7 +22,7 @@ const AddRecipe = (props) => {
       let objEl = {};
       objEl.step = index + 1;
       objEl.text = step.trim();
-      instructionsArr.push(objEl)
+      instructionsArr.push(objEl);
     });
     return {
       ...form,
@@ -96,9 +96,19 @@ const AddRecipe = (props) => {
           />
         </label>
 
+        <label htmlFor="ingredients">
+          {" "}Ingredients:
+          <textarea
+            id="ingredients"
+            placeholder="Separate steps use a *"
+            onChange={changeHandler}
+            value={form.ingredients}
+          />
+        </label>
+
         <label htmlFor="instructions">
           {" "}
-          Separate steps use a *
+          Instructions:
           <textarea
             id="instructions"
             placeholder="Separate steps use a *"

@@ -5,6 +5,10 @@ import schema from "../validation/loginFormSchema";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { setUserId } from "../store/actions";
+// import { SET_USERID } from "../store/actions";
+
 // ** STYLING RULES BEGIN HERE ** //
 
 const FormWrapper = styled.div`
@@ -62,12 +66,14 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-export default function LoginForm() {
+function LoginForm(props) {
+  console.log('hello from props', props);
+
+
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const { push } = useHistory();
-  console.log(formValues);
 
   // ** SUBMIT FUNCTIONS START HERE ** //
 
@@ -76,7 +82,6 @@ export default function LoginForm() {
     console.log(
       "Submitting values, clearing errors and setting new form values..."
     );
-    //post here.
 
     axios
       .post(
@@ -84,9 +89,10 @@ export default function LoginForm() {
         formValues
       )
       .then((res) => {
-        //   console.log(res.data.token);
+        console.log(res);
         localStorage.setItem("token", res.data.token);
-        push('/dashboard')
+        props.setUserId(res.data.id);
+        // push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -209,3 +215,18 @@ export default function LoginForm() {
     </FormWrapper>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    state: state.userData.id
+  };
+  //! for this component I don't need anything *from* state.
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onLogin: (userID) => dispatch({ type: SET_USERID, payload: userID })
+//   };
+// };
+
+export default connect(mapStateToProps, { setUserId })(LoginForm);

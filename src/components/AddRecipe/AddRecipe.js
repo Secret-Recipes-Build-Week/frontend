@@ -23,7 +23,7 @@ const categoryArr = [
 
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
-  console.log(form);
+  // console.log(form);
 
   const formatData = (form) => {
     const instructionsArr = [];

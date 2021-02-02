@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { initialValue } from "./initialValue";
 
-const instuctionsLength = initialValue.instructions.length;
-console.log(instuctionsLength);
 export default function EditRecipe() {
   // edit page will need access to the state for recipe to fill in the form
   const [instructionsNumber, setInstructionsNumber] = useState(0);

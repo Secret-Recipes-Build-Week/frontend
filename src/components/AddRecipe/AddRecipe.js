@@ -11,6 +11,16 @@ const initState = {
   ingredients: "",
 };
 
+const categoryArr = [
+  "---Please Select one---",
+  "breakfast",
+  "lunch",
+  "dinner",
+  "side",
+  "entrée",
+  "dessert",
+];
+
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
   console.log(form);
@@ -33,8 +43,10 @@ const AddRecipe = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const dataReadyToShip = formatData(form);
-    //*post request here
     console.log(dataReadyToShip);
+    //*post request here
+    //*post request here
+    //*post request here
     setForm(initState);
   };
 
@@ -56,6 +68,7 @@ const AddRecipe = (props) => {
     <StyledAddRecipe>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">
+          What is this dish called?
           <input
             type="text"
             id="title"
@@ -66,17 +79,24 @@ const AddRecipe = (props) => {
         </label>
 
         <label htmlFor="categories">
-          {/* //!make select */}
-          <input
-            type="text"
+          {" "}
+          Select a category:
+          <select
             id="categories"
-            placeholder="categories <will be select>"
             onChange={changeHandler}
             value={form.categories}
-          />
+          >
+            {categoryArr.map((cat) => {
+              return (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              );
+            })}
+          </select>
         </label>
 
-        <label htmlFor="keywords">
+        <label htmlFor="keywords"> Keywords you'd like to tag this with:
           <input
             type="text"
             id="keywords"
@@ -87,6 +107,8 @@ const AddRecipe = (props) => {
         </label>
 
         <label htmlFor="source">
+          {" "}
+          Who originated this recipe?
           <input
             type="text"
             id="source"
@@ -96,17 +118,18 @@ const AddRecipe = (props) => {
           />
         </label>
 
-        <label htmlFor="ingredients">
-          {" "}Ingredients:
+        <label htmlFor="ingredients" className="textArealabel">
+          {" "}
+          Ingredients:
           <textarea
             id="ingredients"
-            placeholder="Separate steps use a *"
+            placeholder="Separate ingredients use a *"
             onChange={changeHandler}
             value={form.ingredients}
           />
         </label>
 
-        <label htmlFor="instructions">
+        <label htmlFor="instructions" className="textArealabel">
           {" "}
           Instructions:
           <textarea
@@ -130,14 +153,6 @@ const AddRecipe = (props) => {
           />
         </label>
 
-        {/* <label htmlFor="ingredients"> */}
-        {/* //!key value with select */}
-        {/* <textarea */}
-        {/* id="ingredients" */}
-        {/* placeholder="ingredients" */}
-        {/* onChange={changeHandler} */}
-        {/* /> */}
-        {/* </label> */}
         {form.title ? (
           <button disabled={false}>Add this recipe</button>
         ) : (
@@ -148,4 +163,5 @@ const AddRecipe = (props) => {
   );
 };
 
+//Redux not needed here, no need for { connect }
 export default AddRecipe;

@@ -16,15 +16,17 @@ const AddRecipe = (props) => {
   console.log(form);
 
   const formatData = (form) => {
-    const instructionObj = {}; //!Make this an array of objects with 1. text: prop and 2. step: prop.
+    const instructionsArr = [];
     const splitForm = form.instructions.split("*");
     splitForm.forEach((step, index) => {
-      let propName = `Step ${index + 1}`;
-      instructionObj[propName] = step.trim();
+      let objEl = {};
+      objEl.step = index + 1;
+      objEl.text = step.trim();
+      instructionsArr.push(objEl)
     });
     return {
       ...form,
-      instructions: instructionObj,
+      instructions: instructionsArr,
     };
   };
 

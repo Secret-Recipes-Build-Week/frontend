@@ -10,14 +10,18 @@ export default function EditRecipe() {
   let instuctionsInputs = [];
   let ingredientsInputs = [];
 
+  const handleChange = () => {};
+
   // instructions
   for (let i = 0; i < instructionsNumber; i++) {
     const instuctionsInput = (
       <input
+        key={initialValue.instructions.text}
         id="instructions"
         type="text"
         name="text"
-        value={initialValue.ingredients.ingredient}
+        value={initialValue.instructions.text}
+        onChange={handleChange}
       />
     );
     instuctionsInputs.push(instuctionsInput);
@@ -31,7 +35,14 @@ export default function EditRecipe() {
   // ingredients
   for (let i = 0; i < ingredientNumber; i++) {
     const ingredientsInput = (
-      <input id="ingredient" type="text" name="ingredient" />
+      <input
+        key={initialValue.ingredients.ingredient}
+        id="ingredient"
+        type="text"
+        name="ingredient"
+        value={initialValue.ingredients.ingredient}
+        onChange={handleChange}
+      />
     );
     ingredientsInputs.push(ingredientsInput);
   }
@@ -44,42 +55,54 @@ export default function EditRecipe() {
   return (
     <React.Fragment>
       <form>
+        {/* title */}
         <label htmlFor="title">Title</label>
         <input id="title" type="text" />
         <br />
+        {/* categories */}
         <label htmlFor="categories">Categories</label>
         <select name="categories" id="categories">
           <option value="">select a category</option>
           <option value="">dinner</option>
         </select>
         <br />
+        {/* instructions */}
         <label htmlFor="instructions">Instructions</label>;
+        {/* mapping through whats coming for the get request */}
         {initialValue.instructions.map((instruct) => {
           return (
             <input
+              key={instruct.text}
               id="instructions"
               type="text"
               value={instruct.text}
               name="text"
+              onChange={handleChange}
             />
           );
         })}
+        {/* maps through the adding of input */}
         {instuctionsInputs.map((inp) => {
           return inp;
         })}
         <button onClick={handleAddInstuctions}>Add instructions</button>
         <br />
+        {/* ingredient */}
         <label htmlFor="ingredient">Ingredients</label>
+        {/* mapping through whats coming for the get request */}
         {initialValue.ingredients.map((ingre) => {
           return (
             <input
+              key={ingre.ingredient}
               id="ingredient"
               type="text"
               value={ingre.ingredient}
               name="ingredient"
+              onChange={handleChange}
             />
           );
         })}
+        {/* maps through the adding of input */}
         {ingredientsInputs.map((inp) => {
           return inp;
         })}

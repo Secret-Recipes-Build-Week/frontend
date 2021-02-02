@@ -40,12 +40,12 @@ const inputStyleObject = {
   backgroundColor: "mistyrose",
 };
 
-const checkboxStyleObject = {
-  textAlign: "center",
-  margin: "1rem",
-  padding: "0.2rem",
-  fontWeight: "bold",
-};
+// const checkboxStyleObject = {
+//   textAlign: "center",
+//   margin: "1rem",
+//   padding: "0.2rem",
+//   fontWeight: "bold",
+// };
 
 // ** COMPONENT LOGIC BEGINS HERE **//
 

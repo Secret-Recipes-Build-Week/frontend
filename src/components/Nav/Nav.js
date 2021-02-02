@@ -22,10 +22,10 @@ const Nav = (props) => {
 
 
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
-  const signInFAKEHandler = () => {
-    //Clicking the 'sign in' button will create token
-    setIsLoggedIn(true);
-  };
+  // const signInFAKEHandler = () => {
+  //   //Clicking the 'sign in' button will create token
+  //   setIsLoggedIn(true); //* use Redux instead to set isLoggedIn as true.
+  // };
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   

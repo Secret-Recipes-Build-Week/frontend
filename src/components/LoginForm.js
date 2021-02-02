@@ -50,8 +50,8 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "rloweth9@intel.com",
-  password: "MH8A0GkaOkQU",
+  email: "",
+  password: "",
   // doRemember: false
 };
 

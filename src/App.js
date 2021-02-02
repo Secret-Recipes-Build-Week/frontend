@@ -1,28 +1,31 @@
+//style reset
+import './App.css';
+
 //packages
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 //components
-import PrivateRoute from './components/PrivateRoute';
-import TestComponent from'./components/testComponent/TestComponent';
-import SignUpComponent from './components/SignUpComponent';
-import LoginForm from './components/LoginForm'
-import Nav from './components/Nav/Nav';
-import AddRecipe from './components/AddRecipe/AddRecipe';
+import PrivateRoute from "./components/PrivateRoute";
+import SignUpComponent from "./components/SignUpComponent";
+import LoginForm from "./components/LoginForm";
+import Nav from "./components/Nav/Nav";
+import AddRecipe from "./components/AddRecipe/AddRecipe";
+import LandingPage from './components/LandingPage/LandingPage';
 
 const App = () => {
   return (
     <div>
-      <Nav/>
+      <Nav />
+
       <Switch>
-        <PrivateRoute exact path='/' component={TestComponent}/>
-        {/* <Route path='/'/> */}
-        <Route path='/add' component={AddRecipe}/>
+        <Route exact path='/' component={LandingPage}/>
+        <Route path="/signin" component={LoginForm} />
+        <Route path="/signup" component={SignUpComponent} />
+        <PrivateRoute exact path="/add" component={AddRecipe} />
       </Switch>
-      <SignUpComponent />
-      <LoginForm />
     </div>
   );
-}
+};
 
 export default App;

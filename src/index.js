@@ -3,14 +3,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from 'redux'; //*will need applyMiddleware when thunk is installed and imported
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 //Components
 import App from "./App";
 import reducer from './store/reducer';
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 console.log(store.getState())
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -5,10 +5,10 @@ import {Route, Switch} from 'react-router-dom';
 //components
 import PrivateRoute from './components/PrivateRoute';
 import TestComponent from'./components/testComponent/TestComponent';
+import SignUpComponent from './components/SignUpComponent';
 import LoginForm from './components/LoginForm'
 import Nav from './components/Nav/Nav';
 import AddRecipe from './components/AddRecipe/AddRecipe';
-
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
         {/* <Route path='/'/> */}
         <Route path='/add' component={AddRecipe}/>
       </Switch>
+      <SignUpComponent />
       <LoginForm />
     </div>
   );

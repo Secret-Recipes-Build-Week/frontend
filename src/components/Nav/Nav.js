@@ -14,15 +14,16 @@ const Nav = (props) => {
   }, [isLoggedIn]);
 
 
-  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
   const signoutHandler = () => {
     //Clicking the 'Sign out' button will delete token
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
+
+
+  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
   const signInFAKEHandler = () => {
     //Clicking the 'sign in' button will create token
-    localStorage.setItem("token", "testToken");
     setIsLoggedIn(true);
   };
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -38,8 +39,8 @@ const Nav = (props) => {
     </div>
   ) : (
     <div>
-      <NavLink to="/signin" onClick={signInFAKEHandler}>
-        Sign in
+      <NavLink to="/login">
+        Login
       </NavLink>
       <NavLink to="/signup">Sign up</NavLink>
     </div>

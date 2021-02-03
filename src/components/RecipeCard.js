@@ -20,7 +20,7 @@ export default function RecipeCard(props) {
       });
   }, [id]);
 
-  console.log("recipes", recipe);
+  // console.log("recipes", recipe);
   const displayRecipe = (id) => {
     // push(`/recipe/${}`);
     recipe.map((reci) => {

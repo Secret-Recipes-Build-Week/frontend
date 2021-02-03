@@ -23,13 +23,13 @@ const App = () => {
 
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/edit" component={EditRecipe} />
-        <Route path="/recipe/:id" component={Recipe} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <Route path="/login/" component={LoginForm} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignUpComponent} />
-        <PrivateRoute exact path="/add" component={AddRecipe} />
+        {/* <Route path="/edit" component={EditRecipe} /> */}
+        <PrivateRoute path="/edit" component={EditRecipe} />
+        <PrivateRoute path="/recipe/:id" component={Recipe} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/add" component={AddRecipe} />
       </Switch>
     </div>
   );

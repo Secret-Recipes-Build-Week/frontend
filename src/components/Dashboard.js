@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchUser, setUserInfo } from "../store/actions";
 
 import axiosWithAuth from "./../utils/axiosWithAuth";
-
 import RecipeCard from "./RecipeCard";
 
-export default function Dashboard(props) {
+const Dashboard = (props) => {
   const [userInfo, setUserInfo] = useState({});
-  let id = 10;
+  console.log(userInfo.id);
+  const id = 9;
+  console.log("Dashboard.js props", props);
 
   useEffect(() => {
+    props.fetchUser()
     axiosWithAuth()
       .get(`api/user/${id}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
+        props.setUserInfo(res.data)
         setUserInfo(res.data);
       })
       .catch((err) => {
         console.log(err.message);
+        //!add action for error handling
       });
-  }, [id]);
-  console.log(userInfo);
+  }, []);
 
   return (
     <React.Fragment>
@@ -37,4 +42,12 @@ export default function Dashboard(props) {
       <RecipeCard />
     </React.Fragment>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, {fetchUser, setUserInfo})(Dashboard);

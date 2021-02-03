@@ -74,7 +74,7 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "asdfqwer@aol.com",
+  email: "brianbrian@Brian.com",
   password: "test12343%T",
   // doRemember: false
 };
@@ -86,6 +86,9 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 const initialToggle = false;
+
+
+
 
 function LoginForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -133,7 +136,7 @@ function LoginForm(props) {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/add");
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -267,7 +270,6 @@ function LoginForm(props) {
 const mapStateToProps = (state) => {
   return {
     ...state,
-    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };
@@ -278,4 +280,5 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
+//!I think dispatch is implicitly called /passed to the second argument of connect...?
 export default connect(mapStateToProps, { setUserId })(LoginForm);

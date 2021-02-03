@@ -92,6 +92,11 @@ export default function LoginForm() {
   const { push } = useHistory();
   // console.log(formValues);
 
+  const handleButtonClick = (event) => {
+    event.target.style["background-color"] = "#49BF9D"
+    event.target.style["color"] = "white";
+  }
+
   const handleButtonHover = (event) => {
     event.target.style["color"] = "#49BF9D"
     event.target.style["border-color"] = "#49BF9D"
@@ -259,6 +264,7 @@ export default function LoginForm() {
             onMouseEnter={handleButtonHover}
             onMouseLeave={handleButtonLeave}
             className="submit"
+            onClick = {handleButtonClick}
             disabled={disabled}
           >
             submit

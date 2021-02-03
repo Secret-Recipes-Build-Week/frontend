@@ -15,7 +15,7 @@ const FormWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
 `;
 
 const FormLabelWrapper = styled.div`
@@ -25,7 +25,7 @@ const FormLabelWrapper = styled.div`
 
 const FormHeaderWrapper = styled.header`
   padding: 0.5rem;
-  border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #ffffff;
   font-size: 1.5rem;
 `;
 
@@ -35,7 +35,7 @@ const buttonStyleObject = {
   borderRadius: "20%",
   backgroundColor: "white",
   fontSize: "1rem",
-  border: "2px solid black"
+  border: "2px solid black",
 };
 
 const buttonHoverStyleObject = {
@@ -45,13 +45,12 @@ const buttonHoverStyleObject = {
   backgroundColor: "white",
   borderRadius: "20%",
   fontSize: "1rem",
-  border: "2px solid #49BF9D"
-}
+  border: "2px solid #49BF9D",
+};
 //   border: "2px solid #49BF9D",
 //   color: "#FFFFFF",
 //   padding: "0.5rem",
 //   margin: "0.5rem"
-
 
 const labelStyleObject = {
   margin: "0.5rem",
@@ -63,7 +62,7 @@ const inputStyleObject = {
   borderRadius: "25%",
   backgroundColor: "white",
   borderColor: "black",
-  fontColor: "#FFFFFF"
+  fontColor: "#FFFFFF",
 };
 // const checkboxStyleObject = {
 //   textAlign: "center",
@@ -92,38 +91,36 @@ function LoginForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const toggle = initialToggle
+  const toggle = initialToggle;
   const { push } = useHistory();
 
   const handleButtonHover = (event) => {
-    event.target.style["color"] = "#49BF9D"
-    event.target.style["border-color"] = "#49BF9D"
-    event.target.style["background-color"] = "white"
+    event.target.style["color"] = "#49BF9D";
+    event.target.style["border-color"] = "#49BF9D";
+    event.target.style["background-color"] = "white";
   };
 
   const handleButtonLeave = (event) => {
-    event.target.style["color"] = "black"
-    event.target.style["border-color"] = "black"
-    event.target.style["background-color"] = "#FFFFFF"
-  }
+    event.target.style["color"] = "black";
+    event.target.style["border-color"] = "black";
+    event.target.style["background-color"] = "#FFFFFF";
+  };
 
   const handleInputHover = (event) => {
     // console.log(event.target.style["background-color"])
-    event.target.style["background-color"] = "white"
-    event.target.style["border-color"] = "#49BF9D"
-    event.target.style["border-radius"] = "25%"
+    event.target.style["background-color"] = "white";
+    event.target.style["border-color"] = "#49BF9D";
+    event.target.style["border-radius"] = "25%";
     //event.target.style
-  }
-
-
+  };
 
   const handleInputLeave = (event) => {
-    event.target.style["background-color"] = "white"
-    event.target.style["border-color"] = "black"
-    event.target.style["font-color"] = "#FFFFFF"
-    event.target.style["border-radius"] = "25%"
-    event.target.style["margin"] = "0.5rem"
-  }
+    event.target.style["background-color"] = "white";
+    event.target.style["border-color"] = "black";
+    event.target.style["font-color"] = "#FFFFFF";
+    event.target.style["border-radius"] = "25%";
+    event.target.style["margin"] = "0.5rem";
+  };
   // ** SUBMIT FUNCTIONS START HERE ** //
 
   // Helper function. Empty shell for Axios call and state handlers. //
@@ -142,7 +139,7 @@ function LoginForm(props) {
         console.log(err);
       });
 
-      //!Circle back to reinstate this code.
+    //!Circle back to reinstate this code.
     //then set initial error values.
     // setErrorValues(initialFormErrors);
     //then set initial form values.
@@ -253,7 +250,7 @@ function LoginForm(props) {
           </label> */}
 
           <button
-            style={toggle ? buttonHoverStyleObject:buttonStyleObject}
+            style={toggle ? buttonHoverStyleObject : buttonStyleObject}
             onMouseEnter={handleButtonHover}
             onMouseLeave={handleButtonLeave}
             className="submit"
@@ -269,7 +266,7 @@ function LoginForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    ...state
+    ...state,
     // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.

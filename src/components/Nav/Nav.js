@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import StyledNav from "./StyledNav";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+
+//redux
+import { connect } from "react-redux";
+import { signOutUser } from "../../store/actions";
+
 const Nav = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { push } = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -15,7 +21,10 @@ const Nav = (props) => {
   const signoutHandler = () => {
     //Clicking the 'Sign out' button will delete token
     localStorage.removeItem("token");
+    //dispatch an action to Redux
+    props.signOutUser();
     setIsLoggedIn(false);
+    push("/");
   };
 
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -25,7 +34,7 @@ const Nav = (props) => {
   // };
   // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  const navItems = isLoggedIn ? (
+  const navItems = props.isLoggedIn ? (
     <div>
       <NavLink to="/dashboard">Dashboard</NavLink>
       <NavLink to="/add">Add Recipe</NavLink>
@@ -48,4 +57,10 @@ const Nav = (props) => {
   );
 };
 
-export default Nav;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { signOutUser })(Nav);

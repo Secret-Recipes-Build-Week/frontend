@@ -8,9 +8,9 @@ const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
-      authorization: token,
+      Authorization: token,
     },
-    baseURL: "https://familyrecipe-app-backend.herokuapp.com/", //*add baseURL for endpoint
+    baseURL: "https://familyrecipe-app-backend.herokuapp.com", //*add baseURL for endpoint
   });
 };
 

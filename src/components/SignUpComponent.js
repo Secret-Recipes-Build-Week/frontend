@@ -102,20 +102,24 @@ const H1 = styled.div`
   font-size: 4rem;
   font-weight: bold;
   margin-right: 4rem;
-  height: 100vh;
-  width: 10%;
   display: flex;
   text-align: center;
   color: black;
   position: relative;
+  width: 10%;
   top: 30%;
   text-shadow: 1px 0px 2px rgba(21, 20, 20, 0.46);
   @media only screen and (max-width: 1600px) {
     top: 5%;
     margin: 0 auto;
-    left: 17%;
+    right: -30%;
     font-size: 3rem;
-    flex-direction: row;
+  }
+  @media only screen and (max-width: 775px) {
+    left: 20%;
+  }
+  @media only screen and (max-width: 500px) {
+    left: 15%;
   }
   -webkit-animation-name: slideInDown;
   animation-name: slideInDown;
@@ -230,7 +234,11 @@ const StyledButton = styled.button`
   background-color: transparent;
   border-radius: 0.35em;
   border: solid 3px #efefef;
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 775px) {
+    display: inline-block;
+    left: 30%;
+  }
+  @media only screen and (max-width: 550px) {
     display: inline-block;
     left: 20%;
   }

@@ -5,7 +5,7 @@ const initState = {
     firstName: "",
     lastName: "",
     email: "",
-    id: 1,
+    id: null,
     uuid: "",
     recipes: [
       {
@@ -35,49 +35,64 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
+  console.log(action.payload);
   switch (action.type) {
-    case actionTypes.FETCHING_USER:
+    case actionTypes.SET_USERID:
       return {
         ...state,
-        isLoading: true,
-      };
-    case actionTypes.CREATING_USER: //userData obj needed as payload
-      return {
-        ...state,
-        userData: action.payload,
-        isLoading: false,
+        userData: {
+          ...state.userData,
+          id: action.payload,
+        },
         isLoggedIn: true,
+        isLoading: false,
         error: false,
       };
-    case actionTypes.ADD_RECIPE: //needs a recipe Obj as payload
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          recipes: [...state.userData.recipes, action.payload],
-        },
-      };
-    case actionTypes.DELETE_RECIPE:
-      return{
-        ...state,
-        userData: {
-          ...state.userData,
-          recipes: [state.userData.recipes.filter(rec => {
-            return 'aasdf' //!
-          })]
-        }
-      };
-    case actionTypes.EDIT_RECIPE:
-        return{
-          ...state,
-          userData: {
-            ...state.userData,
-            recipes: [state.userData.recipes]
-          }
-        };
-    default:
-      return state;
-  }
-};
+      default:
+        return state;
+      }
+    };
+    export default reducer;
+    
 
-export default reducer;
+
+    // case actionTypes.FETCHING_USER:
+    //   return {
+    //     ...state,
+    //     isLoading: true,
+    //   };
+    // case actionTypes.CREATING_USER: //userData obj needed as payload
+    //   return {
+    //     ...state,
+    //     userData: action.payload,
+    //     isLoading: false,
+    //     isLoggedIn: true,
+    //     error: false,
+    //   };
+    // case actionTypes.ADD_RECIPE: //needs a recipe Obj as payload
+    //   return {
+    //     ...state,
+    //     userData: {
+    //       ...state.userData,
+    //       recipes: [...state.userData.recipes, action.payload],
+    //     },
+    //   };
+    // case actionTypes.DELETE_RECIPE:
+    //   return{
+    //     ...state,
+    //     userData: {
+    //       ...state.userData,
+    //       recipes: [state.userData.recipes.filter(rec => {
+    //         return 'aasdf' //!
+    //       })]
+    //     }
+    //   };
+    // case actionTypes.EDIT_RECIPE:
+    //     return{
+    //       ...state,
+    //       userData: {
+    //         ...state.userData,
+    //         recipes: [state.userData.recipes]
+    //       }
+    //     };
+

@@ -267,7 +267,6 @@ function LoginForm(props) {
 const mapStateToProps = (state) => {
   return {
     ...state,
-    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };
@@ -278,4 +277,5 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
+//!I think dispatch is implicitly called /passed to the second argument of connect...?
 export default connect(mapStateToProps, { setUserId })(LoginForm);

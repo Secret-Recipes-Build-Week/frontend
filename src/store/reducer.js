@@ -36,6 +36,8 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
+  console.log(action);
+
   switch (action.type) {
     case actionTypes.SET_USERID:
       return {
@@ -53,24 +55,26 @@ const reducer = (state = initState, action) => {
         ...state,
         isLoggedIn: false,
       };
-    case "FETCH_USER":
+    case actionTypes.FETCH_USER:
       return {
         ...state,
         isLoggedIn: true,
         isLoading: true,
         error: false,
       };
-
-    // shazeen
-    case "SET_USER":
+    case actionTypes.SET_USER_INFO:
       return {
         ...state,
         userData: action.payload,
         isLoggedIn: true,
         isLoading: false,
-        error: "",
+        error: false,
       };
-
+    // case actionTypes.SIGNOUT:
+    //   return{
+    //     ...state,
+    //     isLoggedIn: false,
+    //   }
     default:
       return state;
   }

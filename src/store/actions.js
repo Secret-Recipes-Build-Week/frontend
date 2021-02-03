@@ -5,30 +5,24 @@
 // export const EDIT_RECIPE = "EDIT_RECIPE";
 // export const DELETE_RECIPE = "DELETE_RECIPE";
 
-import axiosWithAuth from "./../utils/axiosWithAuth";
-
 export const SIGNOUT = "SIGNOUT";
 export const SET_USERID = "SET_USERID";
+export const FETCH_USER = "FETCH_USER";
+export const SET_USER_INFO = "SET_USER_INFO";
 
 export const signOutUser = () => {
   //no param needed, do that thing you do
   return { type: SIGNOUT };
 };
-
 export const setUserId = (userID) => {
   return { type: SET_USERID, payload: userID };
 };
-
-export const setUserData = (userId) => (dispatch) => {
-  axiosWithAuth()
-    .get(`api/user/${userId}`)
-    .then((res) => {
-      // console.log(res.data);
-      dispatch({ type: "SET_USER", payload: res.data });
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+export const fetchUser = () => {
+  //no payload, do that thing! set is fetching to true
+  return { type: FETCH_USER };
+};
+export const setUserInfo = (userInfoObject) => {
+  return { type: SET_USER_INFO, payload: userInfoObject };
 };
 
 //action factories

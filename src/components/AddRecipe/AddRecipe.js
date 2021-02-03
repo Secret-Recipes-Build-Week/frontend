@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import StyledAddRecipe from "./StyledAddRecipe";
 import axiosWithAuth from "../../utils/axiosWithAuth";
@@ -27,7 +28,9 @@ const categoryArr = [
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
   const { id } = props.userData;
-  console.log('Should contain ID',props.userData);
+  const { push } = useHistory();
+  console.log("AddRecipe.js props", props);
+  // console.log("AddRecipe.js props.userDate", props.userData);
 
   const formatData = (form) => {
     //instructions
@@ -64,6 +67,7 @@ const AddRecipe = (props) => {
       .post(`/api/user/${id}/recipes`, dataReadyToShip)
       .then((res) => {
         console.log(res);
+        push('/dashboard')
       })
       .catch((err) => {
         console.log(err);

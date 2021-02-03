@@ -27,17 +27,10 @@ const Nav = (props) => {
     push("/");
   };
 
-  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // const signInFAKEHandler = () => {
-  //   //Clicking the 'sign in' button will create token
-  //   setIsLoggedIn(true); //* use Redux instead to set isLoggedIn as true.
-  // };
-  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
   const navItems = props.isLoggedIn ? (
     <div>
-      <NavLink to="/dashboard">Dashboard</NavLink>
-      <NavLink to="/add">Add Recipe</NavLink>
+      <NavLink exact to="/dashboard">Dashboard</NavLink>
+      <NavLink to="/dashboard/add">Add Recipe</NavLink>
       <NavLink to="/" onClick={signoutHandler}>
         Sign out
       </NavLink>

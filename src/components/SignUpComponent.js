@@ -53,7 +53,6 @@ export default function SignUpComponent() {
   const history = useHistory();
   //Axios post request
   const postNewUser = (newUser) => {
-    console.log(newUser);
     axios
       .post(
         "https://familyrecipe-app-backend.herokuapp.com/api/auth/register",

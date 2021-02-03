@@ -22,13 +22,13 @@ const App = () => {
       <Nav />
 
       <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/edit" component={EditRecipe} />
+        <Route path="/edit/:id" component={EditRecipe} />
         <Route path="/recipe/:id" component={RecipeCard} />
-        <PrivateRoute exact path="/add" component={AddRecipe} />
+        <PrivateRoute path="/dashboard/add" component={AddRecipe} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignUpComponent} />
+        <Route exact path="/" component={LandingPage} />
       </Switch>
     </div>
   );

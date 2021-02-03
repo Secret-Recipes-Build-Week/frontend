@@ -17,9 +17,9 @@ function Recipes(props) {
         recipe.map((reci) => (
           <section key={reci.id}>
             <h1
-            // onClick={() => {
-            //   displayRecipe(reci.id);
-            // }}
+              onClick={() => {
+                push(`/edit/${reci.id}`);
+              }}
             >
               {reci.title}
               {reci.id}

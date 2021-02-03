@@ -15,7 +15,7 @@ const FormWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  border: 2px solid #FFFFFF;
 `;
 
 const FormLabelWrapper = styled.div`
@@ -24,15 +24,34 @@ const FormLabelWrapper = styled.div`
 `;
 
 const FormHeaderWrapper = styled.header`
-  background-color: blanchedalmond;
   padding: 0.5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #FFFFFF;
+  font-size: 1.5rem;
 `;
 
 const buttonStyleObject = {
   padding: "0.5rem",
   margin: "0.5rem",
+  borderRadius: "20%",
+  backgroundColor: "white",
+  fontSize: "1rem",
+  border: "2px solid black"
 };
+
+const buttonHoverStyleObject = {
+  padding: "0.5rem",
+  margin: "0.5rem",
+  color: "#49BF9D",
+  backgroundColor: "white",
+  borderRadius: "20%",
+  fontSize: "1rem",
+  border: "2px solid #49BF9D"
+}
+//   border: "2px solid #49BF9D",
+//   color: "#FFFFFF",
+//   padding: "0.5rem",
+//   margin: "0.5rem"
+
 
 const labelStyleObject = {
   margin: "0.5rem",
@@ -41,9 +60,11 @@ const labelStyleObject = {
 
 const inputStyleObject = {
   margin: "0.5rem",
-  backgroundColor: "mistyrose",
+  borderRadius: "25%",
+  backgroundColor: "white",
+  borderColor: "black",
+  fontColor: "#FFFFFF"
 };
-
 // const checkboxStyleObject = {
 //   textAlign: "center",
 //   margin: "1rem",
@@ -65,6 +86,7 @@ const initialFormErrors = {
 };
 
 const initialDisabled = true;
+const initialToggle = false;
 
 function LoginForm(props) {
   console.log('hello from props', props);
@@ -73,8 +95,40 @@ function LoginForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const toggle = initialToggle
   const { push } = useHistory();
 
+  // console.log(formValues);
+
+  const handleButtonHover = (event) => {
+    event.target.style["color"] = "#49BF9D"
+    event.target.style["border-color"] = "#49BF9D"
+    event.target.style["background-color"] = "white"
+  };
+
+  const handleButtonLeave = (event) => {
+    event.target.style["color"] = "black"
+    event.target.style["border-color"] = "black"
+    event.target.style["background-color"] = "#FFFFFF"
+  }
+
+  const handleInputHover = (event) => {
+    console.log(event.target.style["background-color"])
+    event.target.style["background-color"] = "white"
+    event.target.style["border-color"] = "#49BF9D"
+    event.target.style["border-radius"] = "25%"
+    //event.target.style
+  }
+
+
+
+  const handleInputLeave = (event) => {
+    event.target.style["background-color"] = "white"
+    event.target.style["border-color"] = "black"
+    event.target.style["font-color"] = "#FFFFFF"
+    event.target.style["border-radius"] = "25%"
+    event.target.style["margin"] = "0.5rem"
+  }
   // ** SUBMIT FUNCTIONS START HERE ** //
 
   // Helper function. Empty shell for Axios call and state handlers. //
@@ -166,13 +220,15 @@ function LoginForm(props) {
           <FormLabelWrapper>
             <label className="label" style={labelStyleObject}>
               {" "}
-              Email
+              E-mail:
               <input
                 style={inputStyleObject}
                 type="email"
                 onChange={onChange}
                 name="email"
                 value={formValues.email}
+                onMouseEnter={handleInputHover}
+                onMouseLeave={handleInputLeave}
               />
             </label>
           </FormLabelWrapper>
@@ -180,13 +236,15 @@ function LoginForm(props) {
           <FormLabelWrapper>
             <label className="label" style={labelStyleObject}>
               {" "}
-              Password
+              Password:
               <input
                 style={inputStyleObject}
                 type="password"
                 onChange={onChange}
                 name="password"
                 value={formValues.password}
+                onMouseEnter={handleInputHover}
+                onMouseLeave={handleInputLeave}
               />
             </label>
           </FormLabelWrapper>
@@ -204,7 +262,9 @@ function LoginForm(props) {
           </label> */}
 
           <button
-            style={buttonStyleObject}
+            style={toggle ? buttonHoverStyleObject:buttonStyleObject}
+            onMouseEnter={handleButtonHover}
+            onMouseLeave={handleButtonLeave}
             className="submit"
             disabled={disabled}
           >

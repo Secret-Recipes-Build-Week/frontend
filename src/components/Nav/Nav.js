@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { signOutUser } from "../../store/actions";
 
 const Nav = (props) => {
-  console.log(props);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { push } = useHistory();
 

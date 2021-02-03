@@ -32,12 +32,12 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 //Global style
 const GlobalStyle = createGlobalStyle`
 html {
-  height: 100%;
+  height: 100vh;
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: #a2a2a2;
-  height: 100%;
+  height: 100vh;
   text-rendering: geometricPrecision;
 }
 `;
@@ -56,9 +56,14 @@ const StyledFormWrapper = styled.div`
   display: flex;
   height: 100vh;
   padding: 0;
+  @media only screen and (max-width: 1600px) {
+    display: flex;
+    justify-content: center;
+  }
   #header {
     display: flex;
     width: 35%;
+    justify-content: center;
     background-repeat: no-repeat;
     background-position: left;
     height: 100%;
@@ -95,14 +100,23 @@ const StyledFormWrapper = styled.div`
 //H1
 const H1 = styled.div`
   font-size: 4rem;
-  font-weight: bolder;
-  margin-right: 1rem;
+  font-weight: bold;
+  margin-right: 4rem;
+  height: 100vh;
+  width: 10%;
   display: flex;
   text-align: center;
-  color: #deb887;
+  color: black;
   position: relative;
   top: 30%;
   text-shadow: 1px 0px 2px rgba(21, 20, 20, 0.46);
+  @media only screen and (max-width: 1600px) {
+    top: 5%;
+    margin: 0 auto;
+    left: 17%;
+    font-size: 3rem;
+    flex-direction: row;
+  }
   -webkit-animation-name: slideInDown;
   animation-name: slideInDown;
   -webkit-animation-duration: 1s;
@@ -154,15 +168,21 @@ const Eye = styled.i`
 `;
 //Styled form
 const StyledForm = styled.form`
-  height: 70vh;
-  width: 100%;
-  max-width: 700px;
-  padding: 40px;
+  height: 80vh;
+  padding: 2rem;
+  min-width: 40%;
   background-color: #fff;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   margin: auto;
+  @media only screen and (max-width: 1600px) {
+    position: relative;
+    top: 15%;
+    left: -13%;
+    min-width: 60%;
+    margin-left: 10%;
+  }
   -webkit-animation-name: fadeInRight;
   animation-name: fadeInRight;
   -webkit-animation-duration: 1s;
@@ -210,6 +230,10 @@ const StyledButton = styled.button`
   background-color: transparent;
   border-radius: 0.35em;
   border: solid 3px #efefef;
+  @media only screen and (max-width: 600px) {
+    display: inline-block;
+    left: 20%;
+  }
   &:hover {
     border-color: #49bf9d;
     color: #49bf9d;
@@ -234,7 +258,9 @@ const StyledButton = styled.button`
 const StyledError = styled.div`
   color: red;
   font-weight: 600;
-  margin: 0 0 40px 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
 `;
 export default function SignUpComponent() {
   //States
@@ -327,17 +353,7 @@ export default function SignUpComponent() {
           id="header"
           alt=""
         />
-
-        <div>
-          <H1>
-            Create
-            <br />
-            an
-            <br />
-            account
-          </H1>
-        </div>
-
+        <H1>Create your account.</H1>
         <StyledForm key="styledForm" onSubmit={onSubmit}>
           <div>
             <label htmlFor="firstName">First Name</label>

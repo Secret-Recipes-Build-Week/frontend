@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const initialValue = {
   title: "",
   categories: [],
@@ -33,12 +31,3 @@ export const initialValue = {
     },
   ], //array of objects of ingredients?
 };
-
-axios
-  .get("https://familyrecipe-app-backend.herokuapp.com/api/user/1")
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });

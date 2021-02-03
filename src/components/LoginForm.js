@@ -86,7 +86,8 @@ export default function LoginForm() {
       .then((res) => {
         //   console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
-        push('/dashboard')
+        console.log(res.data.id);
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);

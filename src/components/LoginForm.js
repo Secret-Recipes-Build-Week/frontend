@@ -75,7 +75,7 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "brireis@aol.com",
+  email: "asdfqwer@aol.com",
   password: "test12343%T",
   // doRemember: false
 };

@@ -7,11 +7,11 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 const initState = {
   title: "test",
   categories: "breakfast",
-  keywords: "keyword, keyword",
-  private: false,
+  // keywords: "keyword, keyword",
+  // private: false,
   source: "Bubby",
   instructions: "asdf * adsfasgegkgjawelkh * Step 14: wash hands * the end",
-  ingredients: "asdf, asdf, asdf, asdf",
+  ingredients: "asdf, asdf * asdf, asdf",
 };
 
 const categoryArr = [
@@ -27,9 +27,10 @@ const categoryArr = [
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
   const { id } = props.userData;
-  console.log(id);
+  console.log('Should contain ID',props.userData);
 
   const formatData = (form) => {
+    //instructions
     const instructionsArr = [];
     const splitForm = form.instructions.split("*");
     splitForm.forEach((step, index) => {
@@ -38,9 +39,18 @@ const AddRecipe = (props) => {
       objEl.text = step.trim();
       instructionsArr.push(objEl);
     });
+
+    //ingredients
+    const splitIngs = form.ingredients.split("*");
+
+    //category
+    const catArr = [form.categories];
+
     return {
       ...form,
       instructions: instructionsArr,
+      ingredients: splitIngs,
+      categories: catArr,
     };
   };
 
@@ -48,10 +58,10 @@ const AddRecipe = (props) => {
     e.preventDefault();
     const dataReadyToShip = formatData(form);
     console.log(dataReadyToShip);
+    console.log("THIS MUST BE A NUMBER", id);
 
     axiosWithAuth()
-      //*post request here //!withAuth has baseURL
-      .post(`https://familyrecipe-app-backend.herokuapp.com/api/user/${id}/recipes`, dataReadyToShip)
+      .post(`/api/user/${id}/recipes`, dataReadyToShip)
       .then((res) => {
         console.log(res);
       })
@@ -176,7 +186,6 @@ const AddRecipe = (props) => {
     </StyledAddRecipe>
   );
 };
-
 
 //
 //* This needs to dispatch an action to update Redux to keep in synch with backend when new recipe is added.

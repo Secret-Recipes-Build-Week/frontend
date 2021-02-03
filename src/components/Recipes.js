@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
   console.log(props);
@@ -18,7 +19,7 @@ function Recipes(props) {
           <section key={reci.id}>
             <h1
               onClick={() => {
-                push(`/edit/${reci.id}`);
+                return <RecipeCard />;
               }}
             >
               {reci.title}

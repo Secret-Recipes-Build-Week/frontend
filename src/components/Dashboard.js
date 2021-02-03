@@ -9,6 +9,7 @@ import AddRecipe from "./AddRecipe/AddRecipe";
 
 const Dashboard = (props) => {
   const [userInfo, setUserInfo] = useState({});
+  console.log(userInfo);
   console.log(props.userData.id);
   // const id = null;
   console.log("Dashboard.js props", props);
@@ -43,7 +44,7 @@ const Dashboard = (props) => {
       {/* isLoggedIn true display edit form */}
       {/* <Route path='' component={}/> */}
       <Switch>
-        <Recipes />
+        <Recipes recipess={userInfo.recipes} />
         <Route
           path="/dashboard/add"
           component={AddRecipe}

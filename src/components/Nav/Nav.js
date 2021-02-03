@@ -7,23 +7,25 @@ import { connect } from "react-redux";
 import { signOutUser } from "../../store/actions";
 
 const Nav = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //! const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { push } = useHistory();
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [isLoggedIn]);
+console.log(props)
+
+  //! useEffect(() => {
+  //!   if (localStorage.getItem("token")) {
+  //!     setIsLoggedIn(true);
+  //!   } else {
+  //!     setIsLoggedIn(false);
+  //!   }
+  //! }, [isLoggedIn]);
 
   const signoutHandler = () => {
     //Clicking the 'Sign out' button will delete token
     localStorage.removeItem("token");
     //dispatch an action to Redux
     props.signOutUser();
-    setIsLoggedIn(false);
+    //! setIsLoggedIn(false);
     push("/");
   };
 

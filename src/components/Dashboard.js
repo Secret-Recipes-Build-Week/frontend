@@ -9,10 +9,10 @@ import AddRecipe from "./AddRecipe/AddRecipe";
 
 const Dashboard = (props) => {
   const [userInfo, setUserInfo] = useState({});
-  console.log(userInfo);
-  console.log(props.userData.id);
+  // console.log(userInfo);
+  // console.log(props.userData.id);
   // const id = null;
-  console.log("Dashboard.js props", props);
+  // console.log("Dashboard.js props", props);
 
   useEffect(() => {
     props.fetchUser();
@@ -27,7 +27,7 @@ const Dashboard = (props) => {
         console.log(err.message);
         //!add action for error handling
       });
-  }, [props]);
+  }, []); //** removed props from here to avoid inf loop **/
 
   return (
     <React.Fragment>

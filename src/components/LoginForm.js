@@ -92,7 +92,7 @@ function LoginForm(props) {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        // push("/dashboard");
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);

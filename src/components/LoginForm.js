@@ -88,13 +88,21 @@ export default function LoginForm() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const [toggle, setToggle ] = useState(initialToggle)
+  const toggle = initialToggle
   const { push } = useHistory();
   // console.log(formValues);
 
-  const handleButtonHover = () => {
-    setToggle(!toggle)
+  const handleButtonHover = (event) => {
+    event.target.style["color"] = "#49BF9D"
+    event.target.style["border-color"] = "#49BF9D"
+    event.target.style["background-color"] = "white"
   };
+
+  const handleButtonLeave = (event) => {
+    event.target.style["color"] = "black"
+    event.target.style["border-color"] = "black"
+    event.target.style["background-color"] = "#FFFFFF"
+  }
 
   const handleInputHover = (event) => {
     console.log(event.target.style["background-color"])
@@ -249,7 +257,7 @@ export default function LoginForm() {
           <button
             style={toggle ? buttonHoverStyleObject:buttonStyleObject}
             onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonHover}
+            onMouseLeave={handleButtonLeave}
             className="submit"
             disabled={disabled}
           >

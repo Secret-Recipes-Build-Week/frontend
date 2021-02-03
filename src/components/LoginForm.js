@@ -74,8 +74,8 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "asdfqwer@aol.com",
-  password: "test12343%T",
+  email: "rloweth9@intel.com",
+  password: "MH8A0GkaOkQU",
   // doRemember: false
 };
 
@@ -133,7 +133,7 @@ function LoginForm(props) {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/add");
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);

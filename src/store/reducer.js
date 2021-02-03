@@ -9,6 +9,7 @@ const initState = {
     uuid: "",
     recipes: [
       {
+        id: "",
         title: "",
         categories: ["", ""],
         keywords: "summer, apple pie, mediterranean",
@@ -31,7 +32,7 @@ const initState = {
   },
   isLoggedIn: false,
   isLoading: false,
-  error: false,
+  error: "",
 };
 
 const reducer = (state = initState, action) => {
@@ -45,58 +46,73 @@ const reducer = (state = initState, action) => {
         },
         isLoggedIn: true,
         isLoading: false,
+        error: "",
+      };
+    case actionTypes.SIGNOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    case "FETCH_USER":
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: true,
         error: false,
       };
-      case actionTypes.SIGNOUT:
-        return{
-          ...state,
-          isLoggedIn: false,
-        } 
-      default:
-        return state;
-      }
-    };
-    export default reducer;
-    
 
+    // shazeen
+    case "SET_USER":
+      return {
+        ...state,
+        userData: action.payload,
+        isLoggedIn: true,
+        isLoading: false,
+        error: "",
+      };
 
-    // case actionTypes.FETCHING_USER:
-    //   return {
-    //     ...state,
-    //     isLoading: true,
-    //   };
-    // case actionTypes.CREATING_USER: //userData obj needed as payload
-    //   return {
-    //     ...state,
-    //     userData: action.payload,
-    //     isLoading: false,
-    //     isLoggedIn: true,
-    //     error: false,
-    //   };
-    // case actionTypes.ADD_RECIPE: //needs a recipe Obj as payload
-    //   return {
-    //     ...state,
-    //     userData: {
-    //       ...state.userData,
-    //       recipes: [...state.userData.recipes, action.payload],
-    //     },
-    //   };
-    // case actionTypes.DELETE_RECIPE:
-    //   return{
-    //     ...state,
-    //     userData: {
-    //       ...state.userData,
-    //       recipes: [state.userData.recipes.filter(rec => {
-    //         return 'aasdf' //!
-    //       })]
-    //     }
-    //   };
-    // case actionTypes.EDIT_RECIPE:
-    //     return{
-    //       ...state,
-    //       userData: {
-    //         ...state.userData,
-    //         recipes: [state.userData.recipes]
-    //       }
-    //     };
+    default:
+      return state;
+  }
+};
+export default reducer;
 
+// case actionTypes.FETCHING_USER:
+//   return {
+//     ...state,
+//     isLoading: true,
+//   };
+// case actionTypes.CREATING_USER: //userData obj needed as payload
+//   return {
+//     ...state,
+//     userData: action.payload,
+//     isLoading: false,
+//     isLoggedIn: true,
+//     error: false,
+//   };
+// case actionTypes.ADD_RECIPE: //needs a recipe Obj as payload
+//   return {
+//     ...state,
+//     userData: {
+//       ...state.userData,
+//       recipes: [...state.userData.recipes, action.payload],
+//     },
+//   };
+// case actionTypes.DELETE_RECIPE:
+//   return{
+//     ...state,
+//     userData: {
+//       ...state.userData,
+//       recipes: [state.userData.recipes.filter(rec => {
+//         return 'aasdf' //!
+//       })]
+//     }
+//   };
+// case actionTypes.EDIT_RECIPE:
+//     return{
+//       ...state,
+//       userData: {
+//         ...state.userData,
+//         recipes: [state.userData.recipes]
+//       }
+//     };

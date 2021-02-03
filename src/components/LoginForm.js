@@ -4,6 +4,7 @@ import * as yup from "yup";
 import schema from "../validation/loginFormSchema";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import image from "../images/bg.jpg"
 
 import { connect } from "react-redux";
 import { setUserId } from "../store/actions";
@@ -11,11 +12,27 @@ import { setUserId } from "../store/actions";
 
 // ** STYLING RULES BEGIN HERE ** //
 
+const shellStyleObject = {
+  display: "flex",
+}
+
+const formDivStyleObject = {
+  borderTop: "2px dashed #49BF9D",
+  borderLeft: "2px dashed skyblue",
+  borderBottom: "2px dashed #49BF9D",
+  padding: "1rem"
+}
+
+const imgStyleObject={
+  height: "30%",
+  width: "30%"
+}
+
 const FormWrapper = styled.div`
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #ffffff;
+  font-family: "Permanent Marker";
+  align-items: center;
+  flex-grow: 2;
 `;
 
 const FormLabelWrapper = styled.div`
@@ -64,12 +81,29 @@ const inputStyleObject = {
   borderColor: "black",
   fontColor: "#FFFFFF",
 };
+
+const driveSignupStyleObject = {
+  fontSize: "1.6rem",
+  padding: "0.8rem"
+}
+
+const driveTeaseStyleObject = {
+  fontSize: "0.8rem",
+  padding: "0.5rem"
+}
+
 // const checkboxStyleObject = {
 //   textAlign: "center",
 //   margin: "1rem",
 //   padding: "0.2rem",
 //   fontWeight: "bold",
 // };
+
+const driveComponentStyleObject = {
+  fontSize: "0.8rem",
+  color: "red"
+}
+
 
 // ** COMPONENT LOGIC BEGINS HERE **//
 
@@ -93,6 +127,11 @@ function LoginForm(props) {
   const [disabled, setDisabled] = useState(initialDisabled);
   const toggle = initialToggle;
   const { push } = useHistory();
+
+  const handleButtonClick = (event) => {
+    event.target.style["background-color"] = "#49BF9D"
+    event.target.style["color"] = "white";
+  }
 
   const handleButtonHover = (event) => {
     event.target.style["color"] = "#49BF9D";
@@ -192,8 +231,10 @@ function LoginForm(props) {
   }, [formValues]);
 
   return (
+    <div className="shell" style={shellStyleObject}>
+    <img alt="a delicious meal" src={image} style={imgStyleObject}></img>
     <FormWrapper>
-      <div className="form">
+      <div className="form" style={formDivStyleObject}>
         <form onSubmit={onSubmit}>
           <FormHeaderWrapper>
             <h1>Family Secrets: Login</h1>
@@ -253,6 +294,7 @@ function LoginForm(props) {
             style={toggle ? buttonHoverStyleObject : buttonStyleObject}
             onMouseEnter={handleButtonHover}
             onMouseLeave={handleButtonLeave}
+            onClick = {handleButtonClick}
             className="submit"
             disabled={disabled}
           >
@@ -260,7 +302,16 @@ function LoginForm(props) {
           </button>
         </form>
       </div>
+      <div className="driveSignup" style={driveSignupStyleObject}>
+        <h1>Don't have an account?</h1>
+        <br></br>
+        <p style={driveTeaseStyleObject}> See what users are sharing...</p>
+        <p style={driveComponentStyleObject}>let's put a component here to render a few recipe cards</p>
+
+      </div>
     </FormWrapper>
+
+    </div>
   );
 }
 

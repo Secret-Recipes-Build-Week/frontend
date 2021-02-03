@@ -258,8 +258,8 @@ function LoginForm(props) {
             style={toggle ? buttonHoverStyleObject : buttonStyleObject}
             onMouseEnter={handleButtonHover}
             onMouseLeave={handleButtonLeave}
-            className="submit"
             onClick = {handleButtonClick}
+            className="submit"
             disabled={disabled}
           >
             submit

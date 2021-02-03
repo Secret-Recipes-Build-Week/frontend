@@ -38,7 +38,7 @@ const Nav = (props) => {
     <div>
       <NavLink to="/dashboard">Dashboard</NavLink>
       <NavLink to="/add">Add Recipe</NavLink>
-      <NavLink to="/" onClick={signoutHandler}>
+      <NavLink to="/"  onClick={signoutHandler}>
         Sign out
       </NavLink>
     </div>
@@ -51,7 +51,7 @@ const Nav = (props) => {
 
   return (
     <StyledNav>
-      <div className="logo">logo</div>
+      <div className="logo">Family Cookbook</div>
       <div className="navItems">{navItems}</div>
     </StyledNav>
   );

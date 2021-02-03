@@ -15,6 +15,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Dashboard";
 import EditRecipe from "./components/EditRecipe";
 import RecipeCard from "./components/RecipeCard";
+import RecipeFeed from "./components/RecipeFeed"
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/signup" component={SignUpComponent} />
         <Route exact path="/" component={LandingPage} />
       </Switch>
+      <RecipeFeed></RecipeFeed>
     </div>
   );
 };

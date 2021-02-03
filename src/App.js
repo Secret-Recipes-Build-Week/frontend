@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import SignUpComponent from "./components/SignUpComponent";
 import LoginForm from "./components/LoginForm";
 import Nav from "./components/Nav/Nav";
-import AddRecipe from "./components/AddRecipe/AddRecipe";
+// import AddRecipe from "./components/AddRecipe/AddRecipe";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Dashboard";
 import EditRecipe from "./components/EditRecipe";
@@ -28,8 +28,8 @@ const App = () => {
         {/* <Route path="/edit" component={EditRecipe} /> */}
         <PrivateRoute path="/edit" component={EditRecipe} />
         <PrivateRoute path="/recipe/:id" component={Recipe} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/add" component={AddRecipe} />
+        <PrivateRoute  path="/dashboard" component={Dashboard} />
+        {/* <PrivateRoute path="/dashboard/add" component={AddRecipe} /> */}
       </Switch>
     </div>
   );

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import StyledAddRecipe from "./StyledAddRecipe";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
 const initState = {
-  title: "",
-  categories: "",
-  keywords: "",
-  private: false,
-  source: "",
-  instructions: "",
-  ingredients: "",
+  title: "test",
+  categories: "breakfast",
+  // keywords: "keyword, keyword",
+  // private: false,
+  source: "Bubby",
+  instructions: "asdf * adsfasgegkgjawelkh * Step 14: wash hands * the end",
+  ingredients: "asdf, asdf * asdf, asdf",
 };
 
 const categoryArr = [
@@ -23,9 +26,11 @@ const categoryArr = [
 
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
-  // console.log(form);
+  const { id } = props.userData;
+  console.log('Should contain ID',props.userData);
 
   const formatData = (form) => {
+    //instructions
     const instructionsArr = [];
     const splitForm = form.instructions.split("*");
     splitForm.forEach((step, index) => {
@@ -34,9 +39,18 @@ const AddRecipe = (props) => {
       objEl.text = step.trim();
       instructionsArr.push(objEl);
     });
+
+    //ingredients
+    const splitIngs = form.ingredients.split("*");
+
+    //category
+    const catArr = [form.categories];
+
     return {
       ...form,
       instructions: instructionsArr,
+      ingredients: splitIngs,
+      categories: catArr,
     };
   };
 
@@ -44,9 +58,17 @@ const AddRecipe = (props) => {
     e.preventDefault();
     const dataReadyToShip = formatData(form);
     console.log(dataReadyToShip);
-    //*post request here
-    //*post request here
-    //*post request here
+    console.log("THIS MUST BE A NUMBER", id);
+
+    axiosWithAuth()
+      .post(`/api/user/${id}/recipes`, dataReadyToShip)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setForm(initState);
   };
 
@@ -96,7 +118,9 @@ const AddRecipe = (props) => {
           </select>
         </label>
 
-        <label htmlFor="keywords"> Keywords you'd like to tag this with:
+        <label htmlFor="keywords">
+          {" "}
+          Keywords you'd like to tag this with:
           <input
             type="text"
             id="keywords"
@@ -163,5 +187,13 @@ const AddRecipe = (props) => {
   );
 };
 
-//Redux not needed here, no need for { connect }
-export default AddRecipe;
+//
+//* This needs to dispatch an action to update Redux to keep in synch with backend when new recipe is added.
+//
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+export default connect(mapStateToProps)(AddRecipe);

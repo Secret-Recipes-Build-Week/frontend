@@ -5,6 +5,10 @@
 // export const EDIT_RECIPE = "EDIT_RECIPE";
 // export const DELETE_RECIPE = "DELETE_RECIPE";
 
+export const SIGNOUT = "SIGNOUT";
+export const signOutUser = () => { //no param needed, do that thing you do
+  return {type: SIGNOUT};
+}
 
 
 export const SET_USERID = "SET_USERID";

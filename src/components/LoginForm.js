@@ -75,8 +75,8 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "",
-  password: "",
+  email: "asdfqwer@aol.com",
+  password: "test12343%T",
   // doRemember: false
 };
 
@@ -89,16 +89,11 @@ const initialDisabled = true;
 const initialToggle = false;
 
 function LoginForm(props) {
-  console.log('hello from props', props);
-
-
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const toggle = initialToggle
   const { push } = useHistory();
-
-  // console.log(formValues);
 
   const handleButtonHover = (event) => {
     event.target.style["color"] = "#49BF9D"
@@ -113,7 +108,7 @@ function LoginForm(props) {
   }
 
   const handleInputHover = (event) => {
-    console.log(event.target.style["background-color"])
+    // console.log(event.target.style["background-color"])
     event.target.style["background-color"] = "white"
     event.target.style["border-color"] = "#49BF9D"
     event.target.style["border-radius"] = "25%"
@@ -133,25 +128,21 @@ function LoginForm(props) {
 
   // Helper function. Empty shell for Axios call and state handlers. //
   const submit = () => {
-    console.log(
-      "Submitting values, clearing errors and setting new form values..."
-    );
-
     axios
       .post(
         "https://familyrecipe-app-backend.herokuapp.com/api/auth/login",
         formValues
       )
       .then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/dashboard");
+        push("/add");
       })
       .catch((err) => {
         console.log(err);
       });
 
+      //!Circle back to reinstate this code.
     //then set initial error values.
     // setErrorValues(initialFormErrors);
     //then set initial form values.
@@ -278,7 +269,8 @@ function LoginForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.userData.id
+    ...state
+    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };

@@ -21,7 +21,7 @@ const StyledNav = styled.div`
     }
   }
   .navItems {
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: space-around;
   }

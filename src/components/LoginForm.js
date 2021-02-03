@@ -260,7 +260,6 @@ function LoginForm(props) {
             onMouseLeave={handleButtonLeave}
             onClick = {handleButtonClick}
             className="submit"
-            onClick = {handleButtonClick}
             disabled={disabled}
           >
             submit

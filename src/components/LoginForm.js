@@ -108,8 +108,8 @@ const driveComponentStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "asdfqwer@aol.com",
-  password: "test12343%T",
+  email: "rloweth9@intel.com",
+  password: "MH8A0GkaOkQU",
   // doRemember: false
 };
 
@@ -172,7 +172,7 @@ function LoginForm(props) {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/add");
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -318,7 +318,6 @@ function LoginForm(props) {
 const mapStateToProps = (state) => {
   return {
     ...state,
-    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };
@@ -329,4 +328,5 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
+//!I think dispatch is implicitly called /passed to the second argument of connect...?
 export default connect(mapStateToProps, { setUserId })(LoginForm);

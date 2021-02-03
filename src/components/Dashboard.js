@@ -1,40 +1,66 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchUser, setUserInfo } from "../store/actions";
+import { Route, Switch } from "react-router-dom";
 
 import axiosWithAuth from "./../utils/axiosWithAuth";
+import Recipes from "./Recipes";
+import AddRecipe from "./AddRecipe/AddRecipe";
 
-import RecipeCard from "./RecipeCard";
-
-export default function Dashboard(props) {
+const Dashboard = (props) => {
   const [userInfo, setUserInfo] = useState({});
-  let id = 10;
+  console.log(userInfo);
+  console.log(props.userData.id);
+  // const id = null;
+  console.log("Dashboard.js props", props);
 
   useEffect(() => {
+    props.fetchUser();
     axiosWithAuth()
-      .get(`api/user/${id}`)
+      .get(`api/user/${props.userData.id}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
+        props.setUserInfo(res.data);
         setUserInfo(res.data);
       })
       .catch((err) => {
         console.log(err.message);
+        //!add action for error handling
       });
-  }, [id]);
-  console.log(userInfo);
+  }, [props]);
 
   return (
     <React.Fragment>
       <h1>
-        Welcome {userInfo.firstName} {userInfo.lastName}
+        Welcome {userInfo.firstName} {userInfo.lastName} {userInfo.id}
       </h1>
       {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe
-
+      
       developer needs:
       ID for each for each recipe
-      */}
+    */}
       {/* isLoggedIn true display edit form */}
-      <RecipeCard />
+      {/* <Route path='' component={}/> */}
+      <Switch>
+        <Recipes recipess={userInfo.recipes} />
+        <Route
+          path="/dashboard/add"
+          component={AddRecipe}
+          // render={() => {
+          // <AddRecipe />;
+          // }}
+        />
+      </Switch>
     </React.Fragment>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { fetchUser, setUserInfo })(Dashboard);

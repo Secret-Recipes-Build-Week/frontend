@@ -1,5 +1,5 @@
 //style reset
-import './App.css';
+import "./App.css";
 
 //packages
 import React from "react";
@@ -11,7 +11,7 @@ import SignUpComponent from "./components/SignUpComponent";
 import LoginForm from "./components/LoginForm";
 import Nav from "./components/Nav/Nav";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
-import LandingPage from './components/LandingPage/LandingPage';
+import LandingPage from "./components/LandingPage/LandingPage";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
       <Nav />
 
       <Switch>
-        <Route exact path='/' component={LandingPage}/>
+        <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignUpComponent} />
         <PrivateRoute exact path="/add" component={AddRecipe} />

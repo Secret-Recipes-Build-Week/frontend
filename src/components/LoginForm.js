@@ -5,13 +5,17 @@ import schema from "../validation/loginFormSchema";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { setUserId } from "../store/actions";
+// import { SET_USERID } from "../store/actions";
+
 // ** STYLING RULES BEGIN HERE ** //
 
 const FormWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  border: 2px solid #FFFFFF;
 `;
 
 const FormLabelWrapper = styled.div`
@@ -20,15 +24,34 @@ const FormLabelWrapper = styled.div`
 `;
 
 const FormHeaderWrapper = styled.header`
-  background-color: blanchedalmond;
   padding: 0.5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #FFFFFF;
+  font-size: 1.5rem;
 `;
 
 const buttonStyleObject = {
   padding: "0.5rem",
   margin: "0.5rem",
+  borderRadius: "20%",
+  backgroundColor: "white",
+  fontSize: "1rem",
+  border: "2px solid black"
 };
+
+const buttonHoverStyleObject = {
+  padding: "0.5rem",
+  margin: "0.5rem",
+  color: "#49BF9D",
+  backgroundColor: "white",
+  borderRadius: "20%",
+  fontSize: "1rem",
+  border: "2px solid #49BF9D"
+}
+//   border: "2px solid #49BF9D",
+//   color: "#FFFFFF",
+//   padding: "0.5rem",
+//   margin: "0.5rem"
+
 
 const labelStyleObject = {
   margin: "0.5rem",
@@ -37,9 +60,11 @@ const labelStyleObject = {
 
 const inputStyleObject = {
   margin: "0.5rem",
-  backgroundColor: "mistyrose",
+  borderRadius: "25%",
+  backgroundColor: "white",
+  borderColor: "black",
+  fontColor: "#FFFFFF"
 };
-
 // const checkboxStyleObject = {
 //   textAlign: "center",
 //   margin: "1rem",
@@ -50,8 +75,8 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "rloweth9@intel.com",
-  password: "MH8A0GkaOkQU",
+  email: "asdfqwer@aol.com",
+  password: "test12343%T",
   // doRemember: false
 };
 
@@ -61,37 +86,63 @@ const initialFormErrors = {
 };
 
 const initialDisabled = true;
+const initialToggle = false;
 
-export default function LoginForm() {
+function LoginForm(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const toggle = initialToggle
   const { push } = useHistory();
-  console.log(formValues);
 
+  const handleButtonHover = (event) => {
+    event.target.style["color"] = "#49BF9D"
+    event.target.style["border-color"] = "#49BF9D"
+    event.target.style["background-color"] = "white"
+  };
+
+  const handleButtonLeave = (event) => {
+    event.target.style["color"] = "black"
+    event.target.style["border-color"] = "black"
+    event.target.style["background-color"] = "#FFFFFF"
+  }
+
+  const handleInputHover = (event) => {
+    // console.log(event.target.style["background-color"])
+    event.target.style["background-color"] = "white"
+    event.target.style["border-color"] = "#49BF9D"
+    event.target.style["border-radius"] = "25%"
+    //event.target.style
+  }
+
+
+
+  const handleInputLeave = (event) => {
+    event.target.style["background-color"] = "white"
+    event.target.style["border-color"] = "black"
+    event.target.style["font-color"] = "#FFFFFF"
+    event.target.style["border-radius"] = "25%"
+    event.target.style["margin"] = "0.5rem"
+  }
   // ** SUBMIT FUNCTIONS START HERE ** //
 
   // Helper function. Empty shell for Axios call and state handlers. //
   const submit = () => {
-    console.log(
-      "Submitting values, clearing errors and setting new form values..."
-    );
-    //post here.
-
     axios
       .post(
         "https://familyrecipe-app-backend.herokuapp.com/api/auth/login",
         formValues
       )
       .then((res) => {
-        //   console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
-        push('/dashboard')
+        props.setUserId(res.data.id);
+        push("/add");
       })
       .catch((err) => {
         console.log(err);
       });
 
+      //!Circle back to reinstate this code.
     //then set initial error values.
     // setErrorValues(initialFormErrors);
     //then set initial form values.
@@ -160,13 +211,15 @@ export default function LoginForm() {
           <FormLabelWrapper>
             <label className="label" style={labelStyleObject}>
               {" "}
-              Email
+              E-mail:
               <input
                 style={inputStyleObject}
                 type="email"
                 onChange={onChange}
                 name="email"
                 value={formValues.email}
+                onMouseEnter={handleInputHover}
+                onMouseLeave={handleInputLeave}
               />
             </label>
           </FormLabelWrapper>
@@ -174,13 +227,15 @@ export default function LoginForm() {
           <FormLabelWrapper>
             <label className="label" style={labelStyleObject}>
               {" "}
-              Password
+              Password:
               <input
                 style={inputStyleObject}
                 type="password"
                 onChange={onChange}
                 name="password"
                 value={formValues.password}
+                onMouseEnter={handleInputHover}
+                onMouseLeave={handleInputLeave}
               />
             </label>
           </FormLabelWrapper>
@@ -198,7 +253,9 @@ export default function LoginForm() {
           </label> */}
 
           <button
-            style={buttonStyleObject}
+            style={toggle ? buttonHoverStyleObject:buttonStyleObject}
+            onMouseEnter={handleButtonHover}
+            onMouseLeave={handleButtonLeave}
             className="submit"
             disabled={disabled}
           >
@@ -209,3 +266,19 @@ export default function LoginForm() {
     </FormWrapper>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    ...state
+    // state: state.userData.id
+  };
+  //! for this component I don't need anything *from* state.
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onLogin: (userID) => dispatch({ type: SET_USERID, payload: userID })
+//   };
+// };
+
+export default connect(mapStateToProps, { setUserId })(LoginForm);

@@ -4,7 +4,7 @@ import StyledLandingPage from './StyledLandingPage';
 const LandingPage = (props) => {
   return(
     <StyledLandingPage>
-      Welcome to day 2!!!
+      Welcome to day 3!!!
     </StyledLandingPage>
 )
 };

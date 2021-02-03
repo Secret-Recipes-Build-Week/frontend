@@ -4,6 +4,7 @@ import { fetchUser, setUserInfo } from "../store/actions";
 
 import axiosWithAuth from "./../utils/axiosWithAuth";
 import RecipeCard from "./RecipeCard";
+import AddRecipe from './AddRecipe/AddRecipe';
 
 const Dashboard = (props) => {
   const [userInfo, setUserInfo] = useState({});
@@ -34,12 +35,13 @@ const Dashboard = (props) => {
       {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe
-
+      
       developer needs:
       ID for each for each recipe
-      */}
+    */}
       {/* isLoggedIn true display edit form */}
       <RecipeCard />
+    <AddRecipe/>
     </React.Fragment>
   );
 };

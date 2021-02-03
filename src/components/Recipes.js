@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
   console.log(props);
   const { userData } = props;
-  const { push } = useHistory();
-  const [recipe, setRecipe] = useState(userData.recipes);
+  const [recipe] = useState(userData.recipes);
   console.log(recipe);
 
   return (

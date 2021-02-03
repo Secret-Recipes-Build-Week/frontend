@@ -27,7 +27,7 @@ const Dashboard = (props) => {
         console.log(err.message);
         //!add action for error handling
       });
-  }, []);
+  }, [props]);
 
   return (
     <React.Fragment>

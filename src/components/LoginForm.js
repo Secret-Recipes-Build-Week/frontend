@@ -75,8 +75,8 @@ const inputStyleObject = {
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "",
-  password: "",
+  email: "brireis@aol.com",
+  password: "test12343%T",
   // doRemember: false
 };
 
@@ -89,9 +89,6 @@ const initialDisabled = true;
 const initialToggle = false;
 
 function LoginForm(props) {
-  console.log('hello from props', props);
-
-
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorValues, setErrorValues] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -146,7 +143,7 @@ function LoginForm(props) {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/dashboard");
+        push("/add");
       })
       .catch((err) => {
         console.log(err);
@@ -278,7 +275,8 @@ function LoginForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.userData.id
+    ...state
+    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };

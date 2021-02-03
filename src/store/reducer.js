@@ -35,7 +35,6 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case actionTypes.SET_USERID:
       return {
@@ -48,6 +47,11 @@ const reducer = (state = initState, action) => {
         isLoading: false,
         error: false,
       };
+      case actionTypes.SIGNOUT:
+        return{
+          ...state,
+          isLoggedIn: false,
+        } 
       default:
         return state;
       }

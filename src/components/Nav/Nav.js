@@ -29,7 +29,9 @@ const Nav = (props) => {
 
   const navItems = props.isLoggedIn ? (
     <div>
-      <NavLink exact to="/dashboard">Dashboard</NavLink>
+      <NavLink exact to="/dashboard">
+        Dashboard
+      </NavLink>
       <NavLink to="/dashboard/add">Add Recipe</NavLink>
       <NavLink to="/" onClick={signoutHandler}>
         Sign out
@@ -44,7 +46,7 @@ const Nav = (props) => {
 
   return (
     <StyledNav>
-      <div className="logo">logo</div>
+      <div className="logo">Family Cookbook</div>
       <div className="navItems">{navItems}</div>
     </StyledNav>
   );

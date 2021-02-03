@@ -51,7 +51,7 @@ const Nav = (props) => {
 
   return (
     <StyledNav>
-      <div className="logo">logo?</div>
+      <div className="logo">logo</div>
       <div className="navItems">{navItems}</div>
     </StyledNav>
   );

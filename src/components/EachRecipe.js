@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import RecipeCard from "./RecipeCard";
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 

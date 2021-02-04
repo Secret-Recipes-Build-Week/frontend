@@ -25,7 +25,7 @@ const Dashboard = (props) => {
         console.log(err.message);
         //!add action for error handling
       });
-  }, []); //** removed props from here to avoid inf loop **/
+  }, [id, fetchUser, setUserInfo]); //** removed props from here to avoid inf loop **/
 
 console.log(userInfo)
 

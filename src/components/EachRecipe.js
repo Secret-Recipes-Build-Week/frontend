@@ -1,6 +1,69 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import image from "../images/bg.jpg"
+
+const RecipeWrapper = styled.div`
+padding: 1.5rem;
+margin: 1rem;
+display: flex;
+justify-content: space-between;
+flex-direction: row;
+
+`
+
+const imgStyleObject={
+  border: "2px dashed goldenrod",
+  display: "border-box",
+  width: "100%",
+}
+
+const headerStyleObject = {
+  fontSize: "2.5rem",
+  fontFamily: 'Shadows Into Light, cursive',
+  fontWeight: 'bold',
+  marginBottom: "0.5rem"
+}
+
+const cardLeftStyleObject = {
+  fontSize: "1rem",
+  padding: "1.5rem",
+  maxWidth: "33%",
+  overflow: "hidden"
+}
+
+const cardRightStyleObject = {
+  padding: "1.5rem",
+  width: "100%",
+  borderLeft: "2px dashed skyblue"
+}
+
+const sectionStyleObject = {
+  border: "2px dashed #49BF9D",
+  display: "flex",
+  width: "100%"
+}
+
+const labelStyleObject = {
+  fontSize: "1.6rem",
+  fontFamily: "Shadows Into Light, cursive",
+  backgroundColor: "tan",
+  display: "inline-block",
+  opacity: "80%",
+  marginTop: "1rem",
+  marginBottom: "0.5rem",
+  fontWeight: "bold"
+}
+
+const subHeaderStyleObject = {
+  fontFamily: "Parisienne, cursive"
+}
+
+const paragraphStyleObject = {
+  fontFamily: "Caveat, cursive",
+  fontSize: "1.4rem"
+}
 
 function EachRecipe(props) {
   const { id } = useParams();
@@ -20,39 +83,52 @@ function EachRecipe(props) {
 
   return (
     <div>
+      <RecipeWrapper>
       {recip.map((r, i) => (
-        <section key={i}>
-          <h1> Recipe Title: {r.title}</h1>
+        <section style={sectionStyleObject}key={i}>
+
+          <div className="cardLeft" style={cardLeftStyleObject}>
+          <h1 style={headerStyleObject}> {r.title}</h1>
+          <p style={subHeaderStyleObject}> courtesy of {r.source},</p>
+          <p style={subHeaderStyleObject}> crafted with love by {r.createdBy}.</p>
           <br />
-          <p> Created by: {r.createdBy}</p>
-          <br />
-          <p>Categories:</p>
+          <img src={image} alt="meal" style={imgStyleObject}></img>
+          </div>
+
+          <div className="cardRight" style={cardRightStyleObject}>
+          <p style={labelStyleObject}>Categories</p>
           {r.categories.map((c, i) => (
-            <p key={i}>{c.category}</p>
+            <p style={paragraphStyleObject}key={i}>{c.category}</p>
           ))}
           <br />
-          <p>Ingredients:</p>
+          <p style={labelStyleObject}>Ingredients</p>
           {r.ingredients.map((i) => (
-            <p key={i.id}>{i.name}</p>
+            <p style={paragraphStyleObject}key={i.id}>{i.name}</p>
           ))}
           <br />
-          <p>Instructions</p>
+          <p style={labelStyleObject}>Instructions</p>
           {r.instructions.map((i) => (
-            <p key={i.id}>{i.text}</p>
+            <p style={paragraphStyleObject}key={i.id}>{i.text}</p>
           ))}
           <br />
-          <p>Keywords:</p>
-          {r.keyworkds ? r.keyworkds : "You did not set any keywords"}
+          <p style={labelStyleObject}>Keywords:</p>
+          <br />
+          {r.keywords ? r.keywords : "You did not set any keywords"}
           <br />
           <br />
-          <p>Private Recipe: {r.private === 0 ? "Not Private" : "Private"}</p>
+          <p style={labelStyleObject}>This recipe is {r.private === 0 ? "Not Private" : "Private"}</p>
           <br />
-          <p> Source: {r.source}</p>
+
+          <button>Edit</button>
+          <button>Delete</button>
+          </div>
+          
+          
         </section>
       ))}
-      <button>Edit</button>
-      <button>Delete</button>
+      </RecipeWrapper>
     </div>
+    
   );
 }
 

@@ -5,16 +5,21 @@ import styled from "styled-components";
 
 //Styles//
 const CardContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  overflow: hidden;
-  flex-direction: row;
+  body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    overflow: hidden;
+    flex-direction: row;
+  }
 `;
 const CardWrapper = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
   border: 1px solid black;
   display: grid;
   grid-template-columns: 300px;
@@ -43,10 +48,6 @@ const CardWrapper = styled.div`
     font-size: 28px;
     font-weight: bold;
   }
-  .cardText h2:hover {
-    cursor: pointer;
-
-  }
   .cardText p {
     color: grey;
     font-size: 15px;
@@ -68,15 +69,6 @@ const CardWrapper = styled.div`
     flex-direction: column;
     color: white;
     padding: 10px;
-  }
- 
-  .card {
-    cursor: pointer;
-    margin: 30px;
-    border: 1px solid black;
-    &:hover {
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
-    }
   }
 `;
 export default function RecipeCard(props) {
@@ -111,7 +103,12 @@ export default function RecipeCard(props) {
         recipe.map((reci) => (
           <section key={reci.id}>
             <CardContainer>
-              <CardWrapper className="card">
+              <CardWrapper
+                onClick={() => {
+                  displayRecipe(reci.id);
+                }}
+                className="card"
+              >
                 <img
                   className="cardImage"
                   src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=653&q=80"

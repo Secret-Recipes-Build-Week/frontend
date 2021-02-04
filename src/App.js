@@ -14,7 +14,7 @@ import AddRecipe from "./components/AddRecipe/AddRecipe";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Dashboard";
 import EditRecipe from "./components/EditRecipe";
-import RecipeCard from "./components/RecipeCard";
+import EachRecipe from "./components/EachRecipe";
 
 const App = () => {
   return (
@@ -22,8 +22,8 @@ const App = () => {
       <Nav />
 
       <Switch>
-        <Route path="/edit/:id" component={EditRecipe} />
-        <Route path="/recipe/:id" component={RecipeCard} />
+        <Route path="/dashboard/recipe/edit/:id" component={EditRecipe} />
+        <Route path="/dashboard/recipe/:id" component={EachRecipe} />
         <PrivateRoute path="/dashboard/add" component={AddRecipe} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/login" component={LoginForm} />

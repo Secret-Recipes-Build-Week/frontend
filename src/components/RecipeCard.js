@@ -1,10 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default function RecipeCard(props) {
-  console.log(props);
+function RecipeCard(props) {
   return (
     <div>
-      <p>recipe card</p>
+      {/* <h1>{props.recipe.title}</h1>
+      <p>{props.recipe.categories}</p>
+      <p>{props.recipe.createdBy}</p> */}
+      {/* {props.recipe.ingredients.map((i) => (
+        <p>{i.name}</p>
+      ))}
+      {props.recipe.instructions.map((i) => (
+        <p>{i.text}</p>
+      ))} */}
     </div>
   );
 }
+
+export default RecipeCard;

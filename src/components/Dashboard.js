@@ -20,20 +20,18 @@ const Dashboard = (props) => {
       .get(`api/user/${props.userData.id}`)
       .then((res) => {
         console.log(res.data);
-        props.setUserInfo(res.data);
-        setUserInfo(res.data);
+        props.setUserInfo(res.data.recipes);
+        setUserInfo(res.data.recipes);
       })
       .catch((err) => {
         console.log(err.message);
         //!add action for error handling
       });
-  }, [props]);
+  }, []);
 
   return (
     <React.Fragment>
-      <h1>
-        Welcome {userInfo.firstName} {userInfo.lastName} {userInfo.id}
-      </h1>
+      <h1>Welcome</h1>
       {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe
@@ -43,8 +41,8 @@ const Dashboard = (props) => {
     */}
       {/* isLoggedIn true display edit form */}
       {/* <Route path='' component={}/> */}
+      <Recipes recipes={userInfo} />
       <Switch>
-        <Recipes recipess={userInfo.recipes} />
         <Route
           path="/dashboard/add"
           component={AddRecipe}

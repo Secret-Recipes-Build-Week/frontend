@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
-  console.log("recipes file", props);
+  // console.log(props);
   const { userData } = props;
+  const [recipe] = useState(userData.recipes);
+  // console.log(recipe);
 
   return (
     <React.Fragment>
-      {/* {userData &&
-        userData.map((r) => (
-          <Link key={r.id} to={`/dashboard/recipe/${r.id}`}>
-            <RecipeCard recipe={r} />
-          </Link>
-        ))} */}
+      <h1>recipe title</h1>
+
+      {recipe &&
+        recipe.map((reci, i) => {
+          return (
+            <section>
+              <Link key={i} to={`/dashboard/recipe/${reci.id}`}>
+                {reci.title}
+              </Link>
+            </section>
+          );
+        })}
     </React.Fragment>
   );
 }

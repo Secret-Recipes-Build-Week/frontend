@@ -15,7 +15,7 @@ function Recipes(props) {
       {recipe &&
         recipe.map((reci, i) => {
           return (
-            <section>
+            <section key={i}>
               <Link key={i} to={`/dashboard/recipe/${reci.id}`}>
                 {reci.title}
               </Link>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function EachRecipe(props) {
   const { id } = useParams();
   const newID = parseInt(id);
-  const [recipe, setRecipe] = useState(props.userData.recipes);
+  const [recipe] = useState(props.userData.recipes);
   console.log(recipe);
 
   if (!recipe) {
@@ -27,18 +27,18 @@ function EachRecipe(props) {
           <p> Created by: {r.createdBy}</p>
           <br />
           <p>Categories:</p>
-          {r.categories.map((c) => (
-            <p>{c.category}</p>
+          {r.categories.map((c, i) => (
+            <p key={i}>{c.category}</p>
           ))}
           <br />
           <p>Ingredients:</p>
           {r.ingredients.map((i) => (
-            <p>{i.name}</p>
+            <p key={i.id}>{i.name}</p>
           ))}
           <br />
           <p>Instructions</p>
           {r.instructions.map((i) => (
-            <p>{i.text}</p>
+            <p key={i.id}>{i.text}</p>
           ))}
           <br />
           <p>Keywords:</p>

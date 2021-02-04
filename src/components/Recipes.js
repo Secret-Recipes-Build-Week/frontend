@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
   // console.log(props);
@@ -15,17 +15,13 @@ function Recipes(props) {
       {recipe &&
         recipe.map((reci, i) => {
           return (
-          <section key={i}>
-            <h1
-              onClick={() => {
-                return <RecipeCard />;
-              }}
-            >
-              {reci.title}
-              {reci.id}
-            </h1>
-          </section>
-        )})}
+            <section key={i}>
+              <Link key={i} to={`/dashboard/recipe/${reci.id}`}>
+                {reci.title}
+              </Link>
+            </section>
+          );
+        })}
     </React.Fragment>
   );
 }

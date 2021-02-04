@@ -9,8 +9,8 @@ import Recipes from "./Recipes";
 
 const Dashboard = (props) => {
   const [userInfo, setUserInfoOG] = useState({});
-  const {fetchUser, setUserInfo} = props;
-  const {id} = props.userData;
+  const { fetchUser, setUserInfo } = props;
+  const { id } = props.userData;
 
   useEffect(() => {
     fetchUser();
@@ -27,13 +27,11 @@ const Dashboard = (props) => {
       });
   }, [id, fetchUser, setUserInfo]); //** removed props from here to avoid inf loop **/
 
-console.log(userInfo)
+  console.log(userInfo);
 
   return (
     <React.Fragment>
-      <h1>
-        Welcome {userInfo.firstName} {userInfo.lastName} {userInfo.id}
-      </h1>
+      <h1>Welcome</h1>
       {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe

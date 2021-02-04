@@ -4,29 +4,30 @@ import * as yup from "yup";
 import schema from "../validation/loginFormSchema";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import image from "../images/bg.jpg"
+import image from "../images/bg.jpg";
 
 import { connect } from "react-redux";
-import { setUserId } from "../store/actions";
+import { setUserId, setUserInfo } from "../store/actions";
+import axiosWithAuth from "../utils/axiosWithAuth";
 // import { SET_USERID } from "../store/actions";
 
 // ** STYLING RULES BEGIN HERE ** //
 
 const shellStyleObject = {
   display: "flex",
-}
+};
 
 const formDivStyleObject = {
   borderTop: "2px dashed #49BF9D",
   borderLeft: "2px dashed skyblue",
   borderBottom: "2px dashed #49BF9D",
-  padding: "1rem"
-}
+  padding: "1rem",
+};
 
-const imgStyleObject={
+const imgStyleObject = {
   height: "30%",
-  width: "30%"
-}
+  width: "30%",
+};
 
 const FormWrapper = styled.div`
   text-align: center;
@@ -84,13 +85,13 @@ const inputStyleObject = {
 
 const driveSignupStyleObject = {
   fontSize: "1.6rem",
-  padding: "0.8rem"
-}
+  padding: "0.8rem",
+};
 
 const driveTeaseStyleObject = {
   fontSize: "0.8rem",
-  padding: "0.5rem"
-}
+  padding: "0.5rem",
+};
 
 // const checkboxStyleObject = {
 //   textAlign: "center",
@@ -101,15 +102,14 @@ const driveTeaseStyleObject = {
 
 const driveComponentStyleObject = {
   fontSize: "0.8rem",
-  color: "red"
-}
-
+  color: "red",
+};
 
 // ** COMPONENT LOGIC BEGINS HERE **//
 
 const initialFormValues = {
-  email: "asdfqwer@aol.com",
-  password: "test12343%T",
+  email: "rloweth9@intel.com",
+  password: "MH8A0GkaOkQU",
   // doRemember: false
 };
 
@@ -129,9 +129,9 @@ function LoginForm(props) {
   const { push } = useHistory();
 
   const handleButtonClick = (event) => {
-    event.target.style["background-color"] = "#49BF9D"
+    event.target.style["background-color"] = "#49BF9D";
     event.target.style["color"] = "white";
-  }
+  };
 
   const handleButtonHover = (event) => {
     event.target.style["color"] = "#49BF9D";
@@ -172,7 +172,17 @@ function LoginForm(props) {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         props.setUserId(res.data.id);
-        push("/add");
+
+        axiosWithAuth()
+        .get(`api/user/${res.data.id}`)
+        .then((res) => {
+            console.log(res.data)
+            props.setUserInfo(res.data);
+            push("/dashboard");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -232,53 +242,53 @@ function LoginForm(props) {
 
   return (
     <div className="shell" style={shellStyleObject}>
-    <img alt="a delicious meal" src={image} style={imgStyleObject}></img>
-    <FormWrapper>
-      <div className="form" style={formDivStyleObject}>
-        <form onSubmit={onSubmit}>
-          <FormHeaderWrapper>
-            <h1>Family Secrets: Login</h1>
-          </FormHeaderWrapper>
+      <img alt="a delicious meal" src={image} style={imgStyleObject}></img>
+      <FormWrapper>
+        <div className="form" style={formDivStyleObject}>
+          <form onSubmit={onSubmit}>
+            <FormHeaderWrapper>
+              <h1>Family Secrets: Login</h1>
+            </FormHeaderWrapper>
 
-          <div className="errors">
-            <div className="error">{errorValues.name}</div>
-            <div className="error">{errorValues.size}</div>
-            <div className="error">{errorValues.email}</div>
-          </div>
+            <div className="errors">
+              <div className="error">{errorValues.name}</div>
+              <div className="error">{errorValues.size}</div>
+              <div className="error">{errorValues.email}</div>
+            </div>
 
-          <FormLabelWrapper>
-            <label className="label" style={labelStyleObject}>
-              {" "}
-              E-mail:
-              <input
-                style={inputStyleObject}
-                type="email"
-                onChange={onChange}
-                name="email"
-                value={formValues.email}
-                onMouseEnter={handleInputHover}
-                onMouseLeave={handleInputLeave}
-              />
-            </label>
-          </FormLabelWrapper>
+            <FormLabelWrapper>
+              <label className="label" style={labelStyleObject}>
+                {" "}
+                E-mail:
+                <input
+                  style={inputStyleObject}
+                  type="email"
+                  onChange={onChange}
+                  name="email"
+                  value={formValues.email}
+                  onMouseEnter={handleInputHover}
+                  onMouseLeave={handleInputLeave}
+                />
+              </label>
+            </FormLabelWrapper>
 
-          <FormLabelWrapper>
-            <label className="label" style={labelStyleObject}>
-              {" "}
-              Password:
-              <input
-                style={inputStyleObject}
-                type="password"
-                onChange={onChange}
-                name="password"
-                value={formValues.password}
-                onMouseEnter={handleInputHover}
-                onMouseLeave={handleInputLeave}
-              />
-            </label>
-          </FormLabelWrapper>
+            <FormLabelWrapper>
+              <label className="label" style={labelStyleObject}>
+                {" "}
+                Password:
+                <input
+                  style={inputStyleObject}
+                  type="password"
+                  onChange={onChange}
+                  name="password"
+                  value={formValues.password}
+                  onMouseEnter={handleInputHover}
+                  onMouseLeave={handleInputLeave}
+                />
+              </label>
+            </FormLabelWrapper>
 
-          {/* <label className="label" style={checkboxStyleObject}>
+            {/* <label className="label" style={checkboxStyleObject}>
             {" "}
             remember me
             <input
@@ -290,27 +300,27 @@ function LoginForm(props) {
             />
           </label> */}
 
-          <button
-            style={toggle ? buttonHoverStyleObject : buttonStyleObject}
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
-            onClick = {handleButtonClick}
-            className="submit"
-            disabled={disabled}
-          >
-            submit
-          </button>
-        </form>
-      </div>
-      <div className="driveSignup" style={driveSignupStyleObject}>
-        <h1>Don't have an account?</h1>
-        <br></br>
-        <p style={driveTeaseStyleObject}> See what users are sharing...</p>
-        <p style={driveComponentStyleObject}>let's put a component here to render a few recipe cards</p>
-
-      </div>
-    </FormWrapper>
-
+            <button
+              style={toggle ? buttonHoverStyleObject : buttonStyleObject}
+              onMouseEnter={handleButtonHover}
+              onMouseLeave={handleButtonLeave}
+              onClick={handleButtonClick}
+              className="submit"
+              disabled={disabled}
+            >
+              submit
+            </button>
+          </form>
+        </div>
+        <div className="driveSignup" style={driveSignupStyleObject}>
+          <h1>Don't have an account?</h1>
+          <br></br>
+          <p style={driveTeaseStyleObject}> See what users are sharing...</p>
+          <p style={driveComponentStyleObject}>
+            let's put a component here to render a few recipe cards
+          </p>
+        </div>
+      </FormWrapper>
     </div>
   );
 }
@@ -318,7 +328,6 @@ function LoginForm(props) {
 const mapStateToProps = (state) => {
   return {
     ...state,
-    // state: state.userData.id
   };
   //! for this component I don't need anything *from* state.
 };
@@ -329,4 +338,5 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps, { setUserId })(LoginForm);
+//!I think dispatch is implicitly called /passed to the second argument of connect...?
+export default connect(mapStateToProps, { setUserId, setUserInfo })(LoginForm);

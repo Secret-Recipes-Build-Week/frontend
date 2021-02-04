@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import StyledAddRecipe from "./StyledAddRecipe";
 import axiosWithAuth from "../../utils/axiosWithAuth";
+import { addRecipe } from "../../store/actions";
 
 const initState = {
   title: "test",
@@ -27,7 +29,8 @@ const categoryArr = [
 const AddRecipe = (props) => {
   const [form, setForm] = useState(initState);
   const { id } = props.userData;
-  console.log('Should contain ID',props.userData);
+  const { push } = useHistory();
+  console.log("AddRecipe.js props", props);
 
   const formatData = (form) => {
     //instructions
@@ -57,13 +60,15 @@ const AddRecipe = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const dataReadyToShip = formatData(form);
-    console.log(dataReadyToShip);
-    console.log("THIS MUST BE A NUMBER", id);
+    // console.log(dataReadyToShip);
+    // console.log("THIS MUST BE A NUMBER", id);
 
     axiosWithAuth()
       .post(`/api/user/${id}/recipes`, dataReadyToShip)
       .then((res) => {
         console.log(res);
+        props.addRecipe(dataReadyToShip)
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -196,4 +201,4 @@ const mapStateToProps = (state) => {
     ...state,
   };
 };
-export default connect(mapStateToProps)(AddRecipe);
+export default connect(mapStateToProps, { addRecipe })(AddRecipe);

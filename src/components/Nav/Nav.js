@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import StyledNav from "./StyledNav";
 import { NavLink, useHistory } from "react-router-dom";
 
@@ -7,38 +7,24 @@ import { connect } from "react-redux";
 import { signOutUser } from "../../store/actions";
 
 const Nav = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { push } = useHistory();
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [isLoggedIn]);
+console.log(props)
 
   const signoutHandler = () => {
-    //Clicking the 'Sign out' button will delete token
     localStorage.removeItem("token");
-    //dispatch an action to Redux
     props.signOutUser();
-    setIsLoggedIn(false);
     push("/");
   };
 
-  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOR DEVELOPEMENT ONLY>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // const signInFAKEHandler = () => {
-  //   //Clicking the 'sign in' button will create token
-  //   setIsLoggedIn(true); //* use Redux instead to set isLoggedIn as true.
-  // };
-  // ! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DELETE^^^>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-  const navItems = props.isLoggedIn ? (
+  // const navItems = props.isLoggedIn ? (
+  const navItems = localStorage.getItem('token') ? (
     <div>
-      <NavLink to="/dashboard">Dashboard</NavLink>
-      <NavLink to="/add">Add Recipe</NavLink>
-      <NavLink to="/"  onClick={signoutHandler}>
+      <NavLink exact to="/dashboard">
+        Dashboard
+      </NavLink>
+      <NavLink to="/dashboard/add">Add Recipe</NavLink>
+      <NavLink to="/" onClick={signoutHandler}>
         Sign out
       </NavLink>
     </div>

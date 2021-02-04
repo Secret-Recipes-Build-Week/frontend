@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function EachRecipe(props) {
   const { id } = useParams();
+  const { push } = useHistory();
   const newID = parseInt(id);
   const [recipe] = useState(props.userData.recipes);
   console.log(recipe);
@@ -17,6 +18,9 @@ function EachRecipe(props) {
   });
 
   console.log(recip);
+  const editClick = () => {
+    push(`/dashboard/recipe/edit/${id}`);
+  };
 
   return (
     <div>
@@ -42,7 +46,8 @@ function EachRecipe(props) {
           ))}
           <br />
           <p>Keywords:</p>
-          {r.keyworkds ? r.keyworkds : "You did not set any keywords"}
+          {r.keywords ? <p>{r.keywords}</p> : "You did not set any keywords"}
+          {/* <p>{r.keywords}</p> */}
           <br />
           <br />
           <p>Private Recipe: {r.private === 0 ? "Not Private" : "Private"}</p>
@@ -50,7 +55,7 @@ function EachRecipe(props) {
           <p> Source: {r.source}</p>
         </section>
       ))}
-      <button>Edit</button>
+      <button onClick={editClick}>Edit</button>
       <button>Delete</button>
     </div>
   );

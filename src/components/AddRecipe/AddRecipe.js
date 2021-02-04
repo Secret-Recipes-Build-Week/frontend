@@ -55,7 +55,7 @@ const AddRecipe = (props) => {
       ingredients: splitIngs,
       categories: catArr,
     };
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

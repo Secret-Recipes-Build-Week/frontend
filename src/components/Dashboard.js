@@ -8,7 +8,7 @@ import AddRecipe from "./AddRecipe/AddRecipe";
 import PrivateRoute from './PrivateRoute';
 
 const Dashboard = (props) => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfoOG] = useState({});
 
   useEffect(() => {
     props.fetchUser();
@@ -17,13 +17,15 @@ const Dashboard = (props) => {
       .then((res) => {
         console.log(res.data);
         props.setUserInfo(res.data);
-        setUserInfo(res.data);
+        setUserInfoOG(res.data);
       })
       .catch((err) => {
         console.log(err.message);
         //!add action for error handling
       });
   }, []); //** removed props from here to avoid inf loop **/
+
+console.log(userInfo)
 
   return (
     <React.Fragment>
@@ -40,13 +42,13 @@ const Dashboard = (props) => {
       {/* isLoggedIn true display edit form */}
       {/* <Route path='' component={}/> */}
       <Recipes recipess={userInfo.recipes} />
-      <PrivateRoute
+      {/* <PrivateRoute
         path="/dashboard/add"
         // component={AddRecipe}
         render={(props) => {
           return <AddRecipe {...props} asdf={"asdf"} />;
         }}
-      />
+      /> */}
     </React.Fragment>
   );
 };

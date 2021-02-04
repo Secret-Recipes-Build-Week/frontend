@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
-  console.log(props);
+  // console.log(props);
   const { userData } = props;
   const [recipe] = useState(userData.recipes);
-  console.log(recipe);
+  // console.log(recipe);
 
   return (
     <React.Fragment>

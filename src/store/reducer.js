@@ -54,6 +54,8 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        isLoading: false,
+        error: "",
       };
     case actionTypes.FETCH_USER:
       return {
@@ -77,6 +79,9 @@ const reducer = (state = initState, action) => {
           ...state.userData,
           recipes: [...state.userData.recipes, action.payload],
         },
+        isLoggedIn: true,
+        isLoading: false,
+        error: false,
       };
     default:
       return state;

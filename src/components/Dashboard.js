@@ -4,16 +4,20 @@ import axiosWithAuth from "./../utils/axiosWithAuth";
 
 import RecipeCard from "./RecipeCard";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //Flex wrapper
 const FlexWrapper = styled.div`
-display: flex;
-justify-content: space-around;
-align-items: center;
-flex-flow: row wrap;
-gap: 3rem;
-`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 3rem;
+  body > div {
+    flex-basis: 33.333333%;
+  }
+`;
+
 export default function Dashboard(props) {
   const [userInfo, setUserInfo] = useState({});
   let id = 10;
@@ -37,15 +41,15 @@ export default function Dashboard(props) {
         Welcome {userInfo.firstName} {userInfo.lastName}
       </h1>
       <FlexWrapper>
-      {/* user is able to see all the recipes 
+        {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe
 
       developer needs:
       ID for each for each recipe
       */}
-      {/* isLoggedIn true display edit form */}
-      <RecipeCard />
+        {/* isLoggedIn true display edit form */}
+        <RecipeCard />
       </FlexWrapper>
     </React.Fragment>
   );

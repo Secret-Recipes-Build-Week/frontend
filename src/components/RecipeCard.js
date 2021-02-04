@@ -19,6 +19,29 @@ const CardContainer = styled.div`
 const CardWrapper = styled.div`
   &:hover {
     cursor: pointer;
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+    animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    @-webkit-keyframes scale-up-center {
+      0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+    }
+    @keyframes scale-up-center {
+      0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+    }
   }
   border: 1px solid black;
   display: grid;
@@ -62,13 +85,29 @@ const CardWrapper = styled.div`
     border-bottom-right-radius: 15px;
     background: #4abf9d;
   }
-  .cardStates .stat {
+  .cardStats .stat {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     color: white;
     padding: 10px;
+  }
+  .cardStats .type {
+    font-size: 11px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .cardStats .value {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .cardStats .border {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+  .cardStats .value sup {
+    font-size: 12px;
   }
 `;
 export default function RecipeCard(props) {
@@ -133,7 +172,7 @@ export default function RecipeCard(props) {
                     </div>
                     <div className="type">Cooking time</div>
                   </div>
-                  <div className="statBorder">
+                  <div className="stat border">
                     <div className="value">4,124</div>
                     <div className="type">Views</div>
                   </div>

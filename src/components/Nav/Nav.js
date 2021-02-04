@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import StyledNav from "./StyledNav";
 import { NavLink, useHistory } from "react-router-dom";
 

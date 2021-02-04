@@ -4,19 +4,21 @@ import { fetchUser, setUserInfo } from "../store/actions";
 
 import axiosWithAuth from "./../utils/axiosWithAuth";
 import Recipes from "./Recipes";
-import AddRecipe from "./AddRecipe/AddRecipe";
-import PrivateRoute from './PrivateRoute';
+// import AddRecipe from "./AddRecipe/AddRecipe";
+// import PrivateRoute from './PrivateRoute';
 
 const Dashboard = (props) => {
   const [userInfo, setUserInfoOG] = useState({});
+  const {fetchUser, setUserInfo} = props;
+  const {id} = props.userData;
 
   useEffect(() => {
-    props.fetchUser();
+    fetchUser();
     axiosWithAuth()
-      .get(`api/user/${props.userData.id}`)
+      .get(`api/user/${id}`)
       .then((res) => {
         console.log(res.data);
-        props.setUserInfo(res.data);
+        setUserInfo(res.data);
         setUserInfoOG(res.data);
       })
       .catch((err) => {

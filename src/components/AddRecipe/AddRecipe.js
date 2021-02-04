@@ -67,7 +67,18 @@ const AddRecipe = (props) => {
       .post(`/api/user/${id}/recipes`, dataReadyToShip)
       .then((res) => {
         console.log(res);
-        props.addRecipe(dataReadyToShip)
+        props.addRecipe(dataReadyToShip);
+
+        axiosWithAuth()
+        .get(`api/user/${res.data.id}`)
+        .then((res) => {
+            console.log(res.data)
+            props.setUserInfo(res.data);
+            push("/dashboard");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         push("/dashboard");
       })
       .catch((err) => {

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { deleteRecipe } from "../store/actions";
 
 function EachRecipe(props) {
+  const {push} = useHistory();
   const { id } = useParams();
   const newID = parseInt(id);
   const [recipe] = useState(props.userData.recipes);
   console.log(recipe);
+  console.log(props);
 
   if (!recipe) {
     return <div>Loading recipe information...</div>;
@@ -17,6 +21,27 @@ function EachRecipe(props) {
   });
 
   console.log(recip);
+
+  const deleteHandler = (e) => {
+    console.log("clicked");
+    console.log(recip[0]); //obj {id:18}
+    console.log(id); //18
+    axiosWithAuth()
+      .delete(`/api/recipes/${recip[0].id}`)
+      .then((res) => {
+        console.log(res);
+        axiosWithAuth()
+          .get(`/api/user/${recipe[0].userID}/recipes`) //USER ID
+          .then((res) => {
+            console.log(res);
+            props.deleteRecipe(res.data)
+            push('/dashboard')
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -51,7 +76,7 @@ function EachRecipe(props) {
         </section>
       ))}
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={deleteHandler}>Delete</button>
     </div>
   );
 }
@@ -62,4 +87,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(EachRecipe);
+export default connect(mapStateToProps, { deleteRecipe })(EachRecipe);

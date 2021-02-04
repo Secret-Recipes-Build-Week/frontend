@@ -6,8 +6,8 @@ import styled from "styled-components";
 //Styles//
 const CardContainer = styled.div`
   body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -43,7 +43,6 @@ const CardWrapper = styled.div`
       }
     }
   }
-  border: 1px solid black;
   display: grid;
   grid-template-columns: 300px;
   grid-template-rows: 210px 210px 80px;

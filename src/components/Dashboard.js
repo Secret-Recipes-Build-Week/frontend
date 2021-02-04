@@ -13,8 +13,10 @@ const FlexWrapper = styled.div`
   align-items: center;
   flex-flow: row wrap;
   gap: 3rem;
-  body > div {
+  margin: 5rem;
+  section {
     flex-basis: 33.333333%;
+    max-width: 300px;
   }
 `;
 

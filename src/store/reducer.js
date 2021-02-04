@@ -54,6 +54,8 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        isLoading: false,
+        error: "",
       };
     case actionTypes.FETCH_USER:
       return {
@@ -70,45 +72,30 @@ const reducer = (state = initState, action) => {
         isLoading: false,
         error: false,
       };
-    // case actionTypes.SIGNOUT:
-    //   return{
-    //     ...state,
-    //     isLoggedIn: false,
-    //   }
+    case actionTypes.ADD_RECIPE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          recipes: [...state.userData.recipes, action.payload],
+        },
+        isLoggedIn: true,
+        isLoading: false,
+        error: false,
+      };
     default:
       return state;
   }
 };
 export default reducer;
 
-// case actionTypes.FETCHING_USER:
-//   return {
-//     ...state,
-//     isLoading: true,
-//   };
-// case actionTypes.CREATING_USER: //userData obj needed as payload
-//   return {
-//     ...state,
-//     userData: action.payload,
-//     isLoading: false,
-//     isLoggedIn: true,
-//     error: false,
-//   };
-// case actionTypes.ADD_RECIPE: //needs a recipe Obj as payload
-//   return {
-//     ...state,
-//     userData: {
-//       ...state.userData,
-//       recipes: [...state.userData.recipes, action.payload],
-//     },
-//   };
 // case actionTypes.DELETE_RECIPE:
 //   return{
 //     ...state,
 //     userData: {
 //       ...state.userData,
 //       recipes: [state.userData.recipes.filter(rec => {
-//         return 'aasdf' //!
+//         return 'aasdf'
 //       })]
 //     }
 //   };

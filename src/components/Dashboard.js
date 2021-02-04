@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUser, setUserInfo } from "../store/actions";
-import { Route, Switch } from "react-router-dom";
 
 import axiosWithAuth from "./../utils/axiosWithAuth";
 import Recipes from "./Recipes";
-import AddRecipe from "./AddRecipe/AddRecipe";
+// import AddRecipe from "./AddRecipe/AddRecipe";
+// import PrivateRoute from './PrivateRoute';
 
 const Dashboard = (props) => {
-  const [userInfo, setUserInfo] = useState({});
-  console.log(userInfo);
-  console.log(props.userData.id);
-  // const id = null;
-  console.log("Dashboard.js props", props);
+  const [userInfo, setUserInfoOG] = useState({});
+  const {fetchUser, setUserInfo} = props;
+  const {id} = props.userData;
 
   useEffect(() => {
-    props.fetchUser();
+    fetchUser();
     axiosWithAuth()
-      .get(`api/user/${props.userData.id}`)
+      .get(`api/user/${id}`)
       .then((res) => {
         console.log(res.data);
-        props.setUserInfo(res.data);
         setUserInfo(res.data);
+        setUserInfoOG(res.data);
       })
       .catch((err) => {
         console.log(err.message);
         //!add action for error handling
       });
-  }, [props]);
+  }, [id, fetchUser, setUserInfo]); //** removed props from here to avoid inf loop **/
+
+console.log(userInfo)
 
   return (
     <React.Fragment>
@@ -43,16 +43,14 @@ const Dashboard = (props) => {
     */}
       {/* isLoggedIn true display edit form */}
       {/* <Route path='' component={}/> */}
-      <Switch>
-        <Recipes recipess={userInfo.recipes} />
-        <Route
-          path="/dashboard/add"
-          component={AddRecipe}
-          // render={() => {
-          // <AddRecipe />;
-          // }}
-        />
-      </Switch>
+      <Recipes recipess={userInfo.recipes} />
+      {/* <PrivateRoute
+        path="/dashboard/add"
+        // component={AddRecipe}
+        render={(props) => {
+          return <AddRecipe {...props} asdf={"asdf"} />;
+        }}
+      /> */}
     </React.Fragment>
   );
 };

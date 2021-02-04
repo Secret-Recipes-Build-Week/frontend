@@ -3,18 +3,19 @@ import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
 
 function Recipes(props) {
-  console.log(props);
+  // console.log(props);
   const { userData } = props;
   const [recipe] = useState(userData.recipes);
-  console.log(recipe);
+  // console.log(recipe);
 
   return (
     <React.Fragment>
       <h1>recipe title</h1>
 
       {recipe &&
-        recipe.map((reci) => (
-          <section key={reci.id}>
+        recipe.map((reci, i) => {
+          return (
+          <section key={i}>
             <h1
               onClick={() => {
                 return <RecipeCard />;
@@ -24,7 +25,7 @@ function Recipes(props) {
               {reci.id}
             </h1>
           </section>
-        ))}
+        )})}
     </React.Fragment>
   );
 }

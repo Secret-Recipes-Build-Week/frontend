@@ -174,9 +174,9 @@ function EditRecipe(props) {
       <form>
         <label htmlFor="instructions">Instructions:</label>
         {/* mapping through whats coming for the get request */}
-        {editRecipe.instructions.map((instruct) => {
+        {editRecipe.instructions.map((instruct, i) => {
           return (
-            <section>
+            <section key={i}>
               <input
                 key={instruct.text}
                 id="instructions"

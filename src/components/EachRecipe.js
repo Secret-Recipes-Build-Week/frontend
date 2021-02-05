@@ -7,7 +7,6 @@ import { deleteRecipe } from "../store/actions";
 function EachRecipe(props) {
   const { push } = useHistory();
   const { id } = useParams();
-  const { push } = useHistory();
   const newID = parseInt(id);
   const [recipe] = useState(props.userData.recipes);
   console.log(recipe);
@@ -83,7 +82,6 @@ function EachRecipe(props) {
       <button key={id} onClick={editClick}>
         Edit
       </button>
-      <button>Edit</button>
       <button onClick={deleteHandler}>Delete</button>
     </div>
   );

@@ -97,9 +97,10 @@ function EditRecipe(props) {
   // PUT ingredient
   const putIngredientSubmit = (e) => {
     e.preventDefault();
+    console.log(editRecipe);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/13`,
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[8].id}`,
         editRecipe
       )
       .then((res) => {

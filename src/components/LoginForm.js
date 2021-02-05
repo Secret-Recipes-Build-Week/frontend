@@ -174,10 +174,10 @@ function LoginForm(props) {
         props.setUserId(res.data.id);
 
         axiosWithAuth()
-        .get(`api/user/${res.data.id}`)
-        .then((res) => {
-            console.log(res.data)
-            localStorage.setItem('user', JSON.stringify(res.data))
+          .get(`api/user/${res.data.id}`)
+          .then((res) => {
+            console.log(res.data);
+            localStorage.setItem("user", JSON.stringify(res.data));
             props.setUserInfo(res.data);
             push("/dashboard");
           })

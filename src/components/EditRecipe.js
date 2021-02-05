@@ -96,12 +96,12 @@ function EditRecipe(props) {
 
   // PUT ingredient
   const putIngredientSubmit = (e) => {
-    e.preventDefault();
-    console.log(editRecipe);
+    // e.preventDefault();
+    console.log(editRecipe.ingredients[0].name);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[8].id}`,
-        editRecipe
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[0].id}`,
+        editRecipe.ingredients[0].name
       )
       .then((res) => {
         console.log(res);
@@ -252,7 +252,7 @@ function EditRecipe(props) {
         {editRecipe.ingredients.map((ingre, i) => {
           return (
             <section key={i}>
-              <label htmlFor={i}>Ingredients</label>
+              <label htmlFor={i}>Ingredients{i + 1}</label>
               <input
                 key={i}
                 id={i}

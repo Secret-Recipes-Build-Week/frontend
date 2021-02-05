@@ -31,7 +31,7 @@ function EditRecipe(props) {
     axiosWithAuth()
       .get(`https://familyrecipe-app-backend.herokuapp.com/api/recipes/${id}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setEditRecipe(res.data);
       })
       .catch((err) => {
@@ -60,6 +60,7 @@ function EditRecipe(props) {
       [e.target.name]: e.target.value,
     });
   };
+
   //  ingredient handle change
   const ingreHandleChange = (e) => {
     e.persist();
@@ -71,10 +72,22 @@ function EditRecipe(props) {
       ingredients: newIngredients,
     });
   };
-  // console.log(editRecipe);
+
+  //  instruction handle change
+  const instrucHandleChange = (e) => {
+    e.persist();
+    let newInstructions = [...editRecipe.instructions];
+    newInstructions[e.target.id].text = e.target.value;
+    setEditRecipe({
+      ...editRecipe,
+      instructions: newInstructions,
+    });
+  };
+  console.log(editRecipe);
 
   // exit editing click
   const exitEdit = () => {
+    // push(`/dashboard/recipe/${id}`);
     push(`/dashboard`);
   };
 
@@ -87,7 +100,11 @@ function EditRecipe(props) {
         editRecipe
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          ingredients: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -97,20 +114,23 @@ function EditRecipe(props) {
   // PUT ingredient
   const putIngredientSubmit = (e) => {
     e.preventDefault();
-    console.log(editRecipe);
+    console.log(editRecipe.ingredients);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[8].id}`,
-        editRecipe
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/`,
+        editRecipe.ingredients
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          ingredients: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-
   // ingredients
   for (let i = 0; i < ingredientNumber; i++) {
     const ingredientsInput = (
@@ -130,7 +150,6 @@ function EditRecipe(props) {
   }
   const handleAddIngredient = (e) => {
     e.preventDefault();
-
     setIngredientNumber(ingredientNumber + 1);
   };
 
@@ -143,7 +162,11 @@ function EditRecipe(props) {
         editRecipe
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          instructions: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -153,13 +176,18 @@ function EditRecipe(props) {
   // PUT Instruction
   const putInstructionSubmit = (e) => {
     e.preventDefault();
+    console.log(editRecipe.instructions);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/${editRecipe.id}`,
-        editRecipe
+        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/`,
+        editRecipe.instructions
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          instructions: res.data,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -252,7 +280,7 @@ function EditRecipe(props) {
         {editRecipe.ingredients.map((ingre, i) => {
           return (
             <section key={i}>
-              <label htmlFor={i}>Ingredients</label>
+              <label htmlFor={i}>Ingredients {i + 1}: </label>
               <input
                 key={i}
                 id={i}
@@ -261,7 +289,7 @@ function EditRecipe(props) {
                 value={ingre.name}
                 onChange={ingreHandleChange}
               />
-              <button onClick={putIngredientSubmit}>Submit Changes</button>
+              <br />
             </section>
           );
         })}
@@ -270,24 +298,26 @@ function EditRecipe(props) {
           return inp;
         })}
         <button onClick={handleAddIngredient}>Add Ingredient</button>
+        <br />
+        <button onClick={putIngredientSubmit}>Submit Changes</button>
       </form>
       <br />
       {/* instructions */}
       <form>
-        <label htmlFor="instructions">Instructions:</label>
         {/* mapping through whats coming for the get request */}
         {editRecipe.instructions.map((instruct, i) => {
           return (
             <section key={i}>
+              <label htmlFor={i}>Step {i + 1}: </label>
               <input
-                key={instruct.text}
-                id="instructions"
+                key={i}
+                id={i}
                 type="text"
                 value={instruct.text}
                 name="text"
-                onChange={handleChange}
+                onChange={instrucHandleChange}
               />
-              <button onClick={putInstructionSubmit}>Submit Changes</button>
+              <br />
             </section>
           );
         })}
@@ -296,6 +326,7 @@ function EditRecipe(props) {
           return inp;
         })}
         <button onClick={handleAddInstuctions}>Add instructions</button>
+        <button onClick={putInstructionSubmit}>Submit Changes</button>
       </form>
       <br />
       {/* categories */}

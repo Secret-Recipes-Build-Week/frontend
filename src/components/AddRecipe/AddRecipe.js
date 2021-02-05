@@ -6,6 +6,20 @@ import StyledAddRecipe from "./StyledAddRecipe";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { addRecipe } from "../../store/actions";
 
+const labelStyleObject = {
+  fontSize: "1.6rem",
+  fontFamily: "Shadows Into Light, cursive",
+  display: "inline-block",
+  opacity: "80%",
+  marginTop: "1rem",
+  marginBottom: "0.5rem",
+  fontWeight: "bold",
+};
+
+const checkboxStyleObject = {
+  display: "inline"
+}
+
 const initState = {
   title: "test",
   categories: "breakfast",
@@ -105,24 +119,32 @@ const AddRecipe = (props) => {
   return (
     <StyledAddRecipe>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">
-          What is this dish called?
+        <div className="formTopSection">
+        <div className="formTop" id="first">
+        <h1 className="formTopHeader">1. Add Some Details </h1>
+        <label style={labelStyleObject} htmlFor="title">
+          What is this recipe called?
+          <br />
           <input
             type="text"
             id="title"
             placeholder="title"
             onChange={changeHandler}
             value={form.title}
+            className="formField"
           />
         </label>
 
-        <label htmlFor="categories">
+
+        <label style={labelStyleObject} htmlFor="categories">
           {" "}
-          Select a category:
+          Which category best fits this recipe?
+          <br />
           <select
             id="categories"
             onChange={changeHandler}
             value={form.categories}
+            className="formField"
           >
             {categoryArr.map((cat) => {
               return (
@@ -134,33 +156,39 @@ const AddRecipe = (props) => {
           </select>
         </label>
 
-        <label htmlFor="keywords">
+        <label style={labelStyleObject} htmlFor="keywords">
           {" "}
-          Keywords you'd like to tag this with:
+          Describe your recipe in a sentence or two.
+          <br />
           <input
             type="text"
             id="keywords"
-            placeholder="keywords"
+            placeholder="a cookie as old as time..."
             onChange={changeHandler}
             value={form.keywords}
+            className="formField"
           />
         </label>
 
-        <label htmlFor="source">
+        <label style={labelStyleObject} htmlFor="source">
           {" "}
           Who originated this recipe?
+          <br />
           <input
             type="text"
             id="source"
             placeholder="source"
             onChange={changeHandler}
             value={form.source}
+            className="formField"
           />
         </label>
-
+        </div>
+        <div className="textFields">
+        <div className="formTop">
         <label htmlFor="ingredients" className="textArealabel">
           {" "}
-          Ingredients:
+          <h1 className="formTopHeaderTwo">2. List Ingredients </h1>
           <textarea
             id="ingredients"
             placeholder="Separate ingredients use a *"
@@ -168,36 +196,44 @@ const AddRecipe = (props) => {
             value={form.ingredients}
           />
         </label>
+        </div>
 
+        <div className="formTop">
         <label htmlFor="instructions" className="textArealabel">
           {" "}
-          Instructions:
+          <h1 className="formTopHeader">3. Write Instructions Here</h1>
           <textarea
             id="instructions"
             placeholder="Separate steps use a *"
             onChange={changeHandler}
             value={form.instructions}
+            className="textAreaStyle"
           />
         </label>
-
+        </div>
+        </div>
+        </div>
         {/* //!Only offer if we display on landing page some public things */}
+        <div className="formBottom">
         <label htmlFor="private">
           {" "}
-          Select if you would like to share this recipe publicly?
+          <span className="formPrivate">Select if you would like to share this recipe publicly. </span>
           <input
             type="checkbox"
             id="private"
             placeholder="private"
             onChange={changeHandler}
             checked={form.private}
+            style={checkboxStyleObject}
           />
         </label>
 
         {form.title ? (
-          <button disabled={false}>Add this recipe</button>
+          <button disabled={false}>Add Recipe</button>
         ) : (
-          <button disabled={true}>Add this recipe</button>
+          <button disabled={true}>Finish Editing</button>
         )}
+        </div>
       </form>
     </StyledAddRecipe>
   );

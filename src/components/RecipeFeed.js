@@ -1,44 +1,47 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import RecipeCard from "./RecipeCard";
 import axios from "axios";
 import Recipes from "./Recipes";
+import RecipePreview from "./RecipePreview";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCubes, faAngleDoubleRight, faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDoubleRight,
+  faAngleDoubleLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 const RecipeFeedWrapper = styled.div`
   .slider {
     position: relative;
-    margin: 0;
+    padding: 0;
     display: flex;
-    flex-flow: row;
-    top: 0;
-    height: 10%;
     box-sizing: border-box;
-    align-items: center;
-    justify-content: row;
     overflow: hidden;
-    border: 1px solid red;
+    justify-content: center;
     margin: 0 auto;
-    max-width: 20rem;
-  }
-  section {
-      margin: 0 auto
+    height: 100%;
+    width: 100%;
   }
   .slide {
     position: relative;
+    width: 100%;
     height: 100%;
+    justify-content: space-around;
+    display: flex;
     transition: 0.5s;
+    flex-direction: row wrap;
+    overflow: hidden;
     background: none;
   }
-
+  /* .slider .slide section:nth-child(2) {
+    display: none;
+  } */
   .goLeft {
     font-size: 4rem;
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    width: 20%;
+    width: 10%;
     background: none;
     height: 100%;
     border: none;
@@ -55,7 +58,7 @@ const RecipeFeedWrapper = styled.div`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 20%;
+    width: 10%;
     height: 100%;
     margin-right: 0;
     background: none;
@@ -67,31 +70,32 @@ const RecipeFeedWrapper = styled.div`
       cursor: pointer;
     }
   }
+  #flexWrapper {
+    flex-basis: 100%;
+  }
 `;
 
 export default function RecipeFeed() {
   const [recipePreview, setRecipePreview] = useState();
 
-  useEffect(() => {
-    axios
-      .get("https://familyrecipe-app-backend.herokuapp.com/api/preview")
-      .then((res) => {
-        setRecipePreview(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  
-  let slideArray = [<Recipes />,<Recipes/>,<Recipes/>,<Recipes/>,<Recipes/>,];
+  // useEffect(() => {
+  //   axios
+  //     .get("https://familyrecipe-app-backend.herokuapp.com/api/preview")
+  //     .then((res) => {
+  //       setRecipePreview(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  let slideArray = [<RecipePreview />];
 
   const [x, setX] = useState(0);
   const goLeft = () => {
-    setX(x + 100);
     x === 0 ? setX(-100 * (slideArray.length - 1)) : setX(x + 100);
   };
   const goRight = () => {
-    setX(x - 100);
     x === -100 * (slideArray.length - 1) ? setX(0) : setX(x - 100);
   };
 
@@ -101,22 +105,23 @@ export default function RecipeFeed() {
         <div className="slider">
           {slideArray.map((item, index) => {
             return (
-                <div
-                  key={index}
-                  className="slide"
-                  style={{ transform: `translateX(${x}%)` }}
-                >
-                  {item}
-                </div>
+              <div
+                id="flexWrapper"
+                key={index}
+                className="slide"
+                style={{ transform: `translateX(${x}%)` }}
+              >
+                {item}
+              </div>
             );
           })}
-          <button className="goLeft" onClick={goLeft}>
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
+
+          {/* <button className="goLeft" onClick={goLeft}>
+            <FontAwesomeIcon icon={faAngleDoubleLeft} />
           </button>
           <button className="goRight" onClick={goRight}>
-          <FontAwesomeIcon icon={faAngleDoubleRight} />
-          </button>
-          
+            <FontAwesomeIcon icon={faAngleDoubleRight} />
+          </button> */}
         </div>
         {
           // Add a function here to map over recipes in state, provided by endpoint.
@@ -127,6 +132,5 @@ export default function RecipeFeed() {
         }
       </RecipeFeedWrapper>
     </div>
-    
   );
 }

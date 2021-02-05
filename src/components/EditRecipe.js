@@ -54,7 +54,7 @@ function EditRecipe(props) {
     e.persist();
     console.log(e.target);
     // const { name, value } = e.target;
-
+    console.log(e.target.name);
     setEditRecipe({
       ...editRecipe,
       [e.target.name]: e.target.value,
@@ -86,17 +86,19 @@ function EditRecipe(props) {
   // PUT ingredient
   const putIngredientSubmit = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.id}`,
-        editRecipe
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    editRecipe.ingredients.filter((i) => {
+      return axiosWithAuth()
+        .put(
+          `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${i.id}`,
+          editRecipe
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   };
 
   // ingredients
@@ -135,6 +137,22 @@ function EditRecipe(props) {
       })
       .catch((err) => {
         console.log(err.message);
+      });
+  };
+
+  // PUT Instruction
+  const putInstructionSubmit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(
+        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/${editRecipe.id}`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -219,7 +237,7 @@ function EditRecipe(props) {
       </form>
       <br />
       {/* ingredient */}
-      <form onSubmit={putIngredientSubmit}>
+      <form>
         <label htmlFor="name">Ingredients</label>
         {/* mapping through whats coming from the get request */}
         {editRecipe.ingredients.map((ingre, i) => {
@@ -233,7 +251,7 @@ function EditRecipe(props) {
                 value={ingre.name}
                 onChange={handleChange}
               />
-              <button>Submit Changes</button>
+              <button onClick={putIngredientSubmit}>Submit Changes</button>
             </section>
           );
         })}
@@ -259,7 +277,7 @@ function EditRecipe(props) {
                 name="text"
                 onChange={handleChange}
               />
-              <button>Submit Changes</button>
+              <button onClick={putInstructionSubmit}>Submit Changes</button>
             </section>
           );
         })}

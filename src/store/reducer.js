@@ -1,7 +1,9 @@
 import * as actionTypes from "./actions";
 
+const userInLocalStorage = JSON.parse(localStorage.getItem('user'));
+
 const initState = {
-  userData: {
+  userData: userInLocalStorage ? userInLocalStorage : {
     firstName: "",
     lastName: "",
     email: "",

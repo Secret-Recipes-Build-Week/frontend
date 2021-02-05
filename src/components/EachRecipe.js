@@ -55,7 +55,9 @@ function EachRecipe(props) {
           <p> Source: {r.source}</p>
         </section>
       ))}
-      <button onClick={editClick}>Edit</button>
+      <button key={id} onClick={editClick}>
+        Edit
+      </button>
       <button>Delete</button>
     </div>
   );

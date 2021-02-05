@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { initialValue } from "./initialValue";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 const formInitialValue = {
@@ -10,15 +9,14 @@ const formInitialValue = {
   categories: [],
   keywords: "",
   private: false,
-  // createdBy: `${this.firstName} ${this.lastName}`, //*changed 'userData' to 'this'. >>>created on backend?
   source: "",
   instructions: [
-    { step: 1, text: "Preheat oven to 400°" },
-    { step: 2, text: "Chop Vegetables" },
+    { step: 1, text: "" },
+    { step: 2, text: "" },
   ],
   ingredients: [
     {
-      name: "Rice",
+      name: "",
     },
   ],
 };
@@ -26,13 +24,14 @@ const formInitialValue = {
 function EditRecipe(props) {
   const { id } = useParams();
   // const newID = parseInt(id);
-  // const { push } = useHistory();
+  const { push } = useHistory();
   const [editRecipe, setEditRecipe] = useState(formInitialValue);
+  let recipeID = editRecipe.id;
   useEffect(() => {
     axiosWithAuth()
       .get(`https://familyrecipe-app-backend.herokuapp.com/api/recipes/${id}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setEditRecipe(res.data);
       })
       .catch((err) => {
@@ -52,13 +51,119 @@ function EditRecipe(props) {
 
   // onChange
   const handleChange = (e) => {
-    console.log(e.target.name);
+    e.persist();
+    // console.log(e);
     // const { name, value } = e.target;
-
+    // console.log(e.target.value);
     setEditRecipe({
       ...editRecipe,
       [e.target.name]: e.target.value,
     });
+  };
+  //  ingredient handle change
+  const ingreHandleChange = (e) => {
+    e.persist();
+    // console.log(e.target.id);
+    let newIngredients = [...editRecipe.ingredients];
+    newIngredients[e.target.id].name = e.target.value;
+    setEditRecipe({
+      ...editRecipe,
+      ingredients: newIngredients,
+    });
+  };
+  // console.log(editRecipe);
+
+  // exit editing click
+  const exitEdit = () => {
+    push(`/dashboard`);
+  };
+
+  // POST ingredients
+  const postIngredientSubmit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post(
+        `https://familyrecipe-app-backend.herokuapp.com/api/recipes/${id}/ingredient`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // PUT ingredient
+  const putIngredientSubmit = (e) => {
+    e.preventDefault();
+    console.log(editRecipe);
+    axiosWithAuth()
+      .put(
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[8].id}`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // ingredients
+  for (let i = 0; i < ingredientNumber; i++) {
+    const ingredientsInput = (
+      <React.Fragment>
+        <input
+          key={i}
+          id="ingredient"
+          type="text"
+          name="name"
+          value={editRecipe.ingredients.name}
+          onChange={handleChange}
+        />
+        <button onClick={postIngredientSubmit}>Submit Changes</button>
+      </React.Fragment>
+    );
+    ingredientsInputs.push(ingredientsInput);
+  }
+  const handleAddIngredient = (e) => {
+    e.preventDefault();
+
+    setIngredientNumber(ingredientNumber + 1);
+  };
+
+  // POST instruction
+  const postInstructionSubmit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post(
+        `https://familyrecipe-app-backend.herokuapp.com/api/recipes/${id}/instruction`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // PUT Instruction
+  const putInstructionSubmit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(
+        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/${editRecipe.id}`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // instructions
@@ -70,10 +175,10 @@ function EditRecipe(props) {
           id="instructions"
           type="text"
           name="text"
-          value={initialValue.instructions.text}
+          value={editRecipe.instructions.text}
           onChange={handleChange}
         />
-        <button>Submit Changes</button>
+        <button onClick={postInstructionSubmit}>Submit Changes</button>
       </section>
     );
     instuctionsInputs.push(instuctionsInput);
@@ -84,34 +189,31 @@ function EditRecipe(props) {
     setInstructionsNumber(instructionsNumber + 1);
   };
 
-  // ingredients
-  for (let i = 0; i < ingredientNumber; i++) {
-    const ingredientsInput = (
-      <React.Fragment>
-        <input
-          id="ingredient"
-          type="text"
-          name="ingredient"
-          value={initialValue.ingredients.ingredient}
-          onChange={handleChange}
-        />
-        <button>Submit Changes</button>
-      </React.Fragment>
-    );
-    ingredientsInputs.push(ingredientsInput);
-  }
-  const handleAddIngredient = (e) => {
+  // PUT reques for title, source, keywords, and private
+
+  const titleKeywordsSpurceSubmit = (e) => {
     e.preventDefault();
 
-    setIngredientNumber(ingredientNumber + 1);
+    axiosWithAuth()
+      .put(
+        `https://familyrecipe-app-backend.herokuapp.com/api/recipes/${recipeID}`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res.data);
+        setEditRecipe(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  // put reques for title, source, keywords, and private
-
   return (
     <React.Fragment>
-      <form>
-        {/* title */}
+      {/* title */}
+      {/* keywords */}
+      {/* source */}
+
+      <form onSubmit={titleKeywordsSpurceSubmit}>
         <label htmlFor="title">Title</label>
         <input
           id="title"
@@ -121,7 +223,7 @@ function EditRecipe(props) {
           value={editRecipe.title}
         />
         <br />
-        {/* source */}
+
         <label htmlFor="source">Source:</label>
         <input
           id="source"
@@ -131,7 +233,7 @@ function EditRecipe(props) {
           onChange={handleChange}
         />
         <br />
-        {/* keywords */}
+
         <label htmlFor="keywords">Keywords:</label>
         <input
           id="keywords"
@@ -146,20 +248,20 @@ function EditRecipe(props) {
       <br />
       {/* ingredient */}
       <form>
-        <label htmlFor="ingredient">Ingredients</label>
         {/* mapping through whats coming from the get request */}
         {editRecipe.ingredients.map((ingre, i) => {
           return (
             <section key={i}>
+              <label htmlFor={i}>Ingredients</label>
               <input
                 key={i}
-                id="ingredient"
+                id={i}
                 type="text"
+                name="name"
                 value={ingre.name}
-                name="ingredient"
-                onChange={handleChange}
+                onChange={ingreHandleChange}
               />
-              <button>Submit Changes</button>
+              <button onClick={putIngredientSubmit}>Submit Changes</button>
             </section>
           );
         })}
@@ -185,7 +287,7 @@ function EditRecipe(props) {
                 name="text"
                 onChange={handleChange}
               />
-              <button>Submit Changes</button>
+              <button onClick={putInstructionSubmit}>Submit Changes</button>
             </section>
           );
         })}
@@ -210,6 +312,7 @@ function EditRecipe(props) {
         <br />
         <button>Submit change</button>
       </form>
+      <button onClick={exitEdit}>Exit Editing</button>
     </React.Fragment>
   );
 }

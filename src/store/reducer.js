@@ -1,5 +1,10 @@
 import * as actionTypes from "./actions";
 
+// const initState = localStorage.getItem("token")
+//   ? {
+//       obect: [],
+//     }
+//   : {
 const initState = {
   userData: {
     firstName: "",
@@ -83,6 +88,14 @@ const reducer = (state = initState, action) => {
         isLoading: false,
         error: false,
       };
+    case actionTypes.DELETE_RECIPE:
+      return{
+        ...state,
+        userData: {
+          ...state.userData,
+          recipes: action.payload
+        }
+      }
     default:
       return state;
   }

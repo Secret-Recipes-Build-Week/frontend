@@ -9,6 +9,7 @@ export const SET_USERID = "SET_USERID";
 export const FETCH_USER = "FETCH_USER";
 export const SET_USER_INFO = "SET_USER_INFO";
 export const ADD_RECIPE = "ADD_RECIPE";
+export const DELETE_RECIPE = "DELETE_RECIPE";
 
 export const signOutUser = () => {
   //no param needed, do that thing you do
@@ -26,6 +27,9 @@ export const setUserInfo = (userInfoObject) => {
 };
 export const addRecipe = (recipe) => {
   return { type: ADD_RECIPE, payload: recipe}
+}
+export const deleteRecipe = (recipe) => {
+  return {type: DELETE_RECIPE, payload: recipe}
 }
 
 //action factories

@@ -100,7 +100,11 @@ function EditRecipe(props) {
         editRecipe
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          ingredients: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -108,14 +112,13 @@ function EditRecipe(props) {
   };
 
   // PUT ingredient
-  const putIngredientSubmit = (e, index) => {
+  const putIngredientSubmit = (e) => {
     e.preventDefault();
-
-    console.log(editRecipe.ingredients[0]);
+    console.log(editRecipe.ingredients);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${editRecipe.ingredients[0].id}`,
-        editRecipe.ingredients[0]
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/`,
+        editRecipe.ingredients
       )
       .then((res) => {
         console.log(res);
@@ -155,7 +158,11 @@ function EditRecipe(props) {
         editRecipe
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          instructions: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -273,8 +280,7 @@ function EditRecipe(props) {
                 value={ingre.name}
                 onChange={ingreHandleChange}
               />
-
-              <button onClick={putIngredientSubmit}>Submit Changes</button>
+              <br />
             </section>
           );
         })}
@@ -283,6 +289,8 @@ function EditRecipe(props) {
           return inp;
         })}
         <button onClick={handleAddIngredient}>Add Ingredient</button>
+        <br />
+        <button onClick={putIngredientSubmit}>Submit Changes</button>
       </form>
       <br />
       {/* instructions */}
@@ -300,7 +308,7 @@ function EditRecipe(props) {
                 name="text"
                 onChange={instrucHandleChange}
               />
-              <button onClick={putInstructionSubmit}>Submit Changes</button>
+              <br />
             </section>
           );
         })}
@@ -309,6 +317,7 @@ function EditRecipe(props) {
           return inp;
         })}
         <button onClick={handleAddInstuctions}>Add instructions</button>
+        <button onClick={putInstructionSubmit}>Submit Changes</button>
       </form>
       <br />
       {/* categories */}

@@ -17,12 +17,12 @@ const Nav = (props) => {
   const signoutHandler = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem('isLoggedIn')
+
     props.signOutUser();
     push("/");
   };
 
-  // const navItems =
-  // props.isLoggedIn && localStorage.getItem("token") ? (
       const navItems = props.isLoggedIn ? (
       <div>
         <NavLink exact to="/dashboard">

@@ -1,6 +1,7 @@
 import * as actionTypes from "./actions";
 
 const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn')
 
 const initState = {
   userData: userInLocalStorage
@@ -34,7 +35,7 @@ const initState = {
           },
         ],
       },
-  isLoggedIn: false,
+  isLoggedIn: isLoggedInLocalStorage ? isLoggedInLocalStorage : false,
   isLoading: false,
   error: "",
 };

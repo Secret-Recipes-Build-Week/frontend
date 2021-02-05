@@ -191,7 +191,7 @@ function EachRecipe(props) {
                 onMouseOver={handleIconHover}
                 onMouseOut={handleIconLeave}
               ></FontAwesomeIcon>
-              <i class="fal fa-edit"></i>
+              <i className="fal fa-edit"></i>
             </div>
           </section>
         ))}

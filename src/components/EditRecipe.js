@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { initialValue } from "./initialValue";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 const formInitialValue = {
@@ -26,7 +26,7 @@ const formInitialValue = {
 function EditRecipe(props) {
   const { id } = useParams();
   // const newID = parseInt(id);
-  const { push } = useHistory();
+  // const { push } = useHistory();
   const [editRecipe, setEditRecipe] = useState(formInitialValue);
   useEffect(() => {
     axiosWithAuth()

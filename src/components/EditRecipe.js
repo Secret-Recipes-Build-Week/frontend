@@ -31,7 +31,7 @@ function EditRecipe(props) {
     axiosWithAuth()
       .get(`https://familyrecipe-app-backend.herokuapp.com/api/recipes/${id}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setEditRecipe(res.data);
       })
       .catch((err) => {
@@ -52,12 +52,23 @@ function EditRecipe(props) {
   // onChange
   const handleChange = (e) => {
     e.persist();
-    console.log(e.target);
+    // console.log(e);
     // const { name, value } = e.target;
-    console.log(e.target.name);
+    // console.log(e.target.value);
     setEditRecipe({
       ...editRecipe,
       [e.target.name]: e.target.value,
+    });
+  };
+  //  ingredient handle change
+  const ingreHandleChange = (e) => {
+    e.persist();
+    // console.log(e.target.id);
+    let newIngredients = [...editRecipe.ingredients];
+    newIngredients[e.target.id].name = e.target.value;
+    setEditRecipe({
+      ...editRecipe,
+      ingredients: newIngredients,
     });
   };
   // console.log(editRecipe);
@@ -79,26 +90,24 @@ function EditRecipe(props) {
         console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   };
 
   // PUT ingredient
   const putIngredientSubmit = (e) => {
     e.preventDefault();
-    editRecipe.ingredients.filter((i) => {
-      return axiosWithAuth()
-        .put(
-          `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/${i.id}`,
-          editRecipe
-        )
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    axiosWithAuth()
+      .put(
+        `https://familyrecipe-app-backend.herokuapp.com/api/ingredients/13`,
+        editRecipe
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   // ingredients
@@ -238,18 +247,18 @@ function EditRecipe(props) {
       <br />
       {/* ingredient */}
       <form>
-        <label htmlFor="name">Ingredients</label>
         {/* mapping through whats coming from the get request */}
         {editRecipe.ingredients.map((ingre, i) => {
           return (
             <section key={i}>
+              <label htmlFor={i}>Ingredients</label>
               <input
                 key={i}
-                id="name"
+                id={i}
                 type="text"
                 name="name"
                 value={ingre.name}
-                onChange={handleChange}
+                onChange={ingreHandleChange}
               />
               <button onClick={putIngredientSubmit}>Submit Changes</button>
             </section>

@@ -9,7 +9,10 @@ import { signOutUser } from "../../store/actions";
 const Nav = (props) => {
   const { push } = useHistory();
 
-console.log(props)
+  console.log(props);
+  //! if (props.isLoggedIn === false) {
+  //!   localStorage.removeItem("token");
+  //! }
 
   const signoutHandler = () => {
     localStorage.removeItem("token");
@@ -18,23 +21,24 @@ console.log(props)
     push("/");
   };
 
-  // const navItems = props.isLoggedIn ? (
-  const navItems = localStorage.getItem('token') ? (
-    <div>
-      <NavLink exact to="/dashboard">
-        Dashboard
-      </NavLink>
-      <NavLink to="/dashboard/add">Add Recipe</NavLink>
-      <NavLink to="/" onClick={signoutHandler}>
-        Sign out
-      </NavLink>
-    </div>
-  ) : (
-    <div>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/signup">Sign up</NavLink>
-    </div>
-  );
+  // const navItems =
+  // props.isLoggedIn && localStorage.getItem("token") ? (
+      const navItems = props.isLoggedIn ? (
+      <div>
+        <NavLink exact to="/dashboard">
+          Dashboard
+        </NavLink>
+        <NavLink to="/dashboard/add">Add Recipe</NavLink>
+        <NavLink to="/" onClick={signoutHandler}>
+          Sign out
+        </NavLink>
+      </div>
+    ) : (
+      <div>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/signup">Sign up</NavLink>
+      </div>
+    );
 
   return (
     <StyledNav>

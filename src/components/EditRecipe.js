@@ -26,7 +26,6 @@ function EditRecipe(props) {
   // const newID = parseInt(id);
   const { push } = useHistory();
   const [editRecipe, setEditRecipe] = useState(formInitialValue);
-  const [index, setIndex] = useState();
   let recipeID = editRecipe.id;
   useEffect(() => {
     axiosWithAuth()

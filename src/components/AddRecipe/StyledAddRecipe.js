@@ -89,7 +89,7 @@ const StyledAddRecipe = styled.div`
     font-size: 2rem;
     border: 2px dashed #49BF9D;
     background-color: #49BF9D;
-    color: white;
+    color: black;
     margin-left: 1rem;
     :disabled{
       background-color: tomato;

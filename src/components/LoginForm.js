@@ -9,6 +9,8 @@ import image from "../images/bg.jpg";
 import { connect } from "react-redux";
 import { setUserId, setUserInfo } from "../store/actions";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import RecipeFeed from "./RecipeFeed";
+
 // import { SET_USERID } from "../store/actions";
 
 // ** STYLING RULES BEGIN HERE ** //
@@ -174,9 +176,9 @@ function LoginForm(props) {
         props.setUserId(res.data.id);
 
         axiosWithAuth()
-        .get(`api/user/${res.data.id}`)
-        .then((res) => {
-            console.log(res.data)
+          .get(`api/user/${res.data.id}`)
+          .then((res) => {
+            console.log(res.data);
             props.setUserInfo(res.data);
             push("/dashboard");
           })
@@ -317,11 +319,12 @@ function LoginForm(props) {
           <br></br>
           <p style={driveTeaseStyleObject}> See what users are sharing...</p>
           <p style={driveComponentStyleObject}>
-            let's put a component here to render a few recipe cards
           </p>
+          <RecipeFeed />
         </div>
       </FormWrapper>
     </div>
+    
   );
 }
 

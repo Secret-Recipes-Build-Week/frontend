@@ -2,15 +2,30 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import RecipeCard from "./RecipeCard";
 
 //Styles//
 const CardContainer = styled.div`
+  * {
+    text-rendering: geometricPrecision;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+   div>div>h2 {
+    text-decoration: none;
+  }
   body {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     overflow: hidden;
+    align-items: center;
     flex-direction: row;
   }
 `;
@@ -65,14 +80,19 @@ const CardWrapper = styled.div`
   }
   .cardText h2 {
     margin-top: 0;
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: bold;
   }
-  .cardText p {
+  .cardText p:nth-last-child(1) {
     color: grey;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: bold;
-    margin-block-start: 1rem;
+    position: absolute;
+    margin-top: 8rem;
+    margin-left: -1rem;
+  }
+  .cardText p:nth-of-type(1) {
+    font-weight: bold;
   }
   .cardStats {
     grid-area: "stats";
@@ -82,6 +102,8 @@ const CardWrapper = styled.div`
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background: #4abf9d;
+    position: relative;
+    top: 60%;
   }
   .cardStats .stat {
     display: flex;
@@ -89,10 +111,10 @@ const CardWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     color: white;
-    padding: 10px;
+    padding: 0.7rem;
   }
   .cardStats .type {
-    font-size: 11px;
+    font-size: 0.7rem;
     font-weight: 300;
     text-transform: uppercase;
   }
@@ -121,37 +143,16 @@ function Recipes(props) {
         recipe.map((reci, i) => {
           return (
             <section key={i}>
-              <Link key={i} to={`/dashboard/recipe/${reci.id}`}></Link>
               <CardContainer>
-                <CardWrapper className="card">
-                  <img
-                    className="cardImage"
-                    src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=653&q=80"
-                    alt=""
-                  />
-                  <div className="cardText">
-                    <h2>{reci.title}</h2>
-                    <br />
-                    <p>You will love this recipe! Try it out!</p>
-                    <p>It's fast and easy, and taste amazing!</p>
-                  </div>
-                  <div className="cardStats">
-                    <div className="stat">
-                      <div className="value">
-                        4<sup>m</sup>
-                      </div>
-                      <div className="type">Cooking time</div>
-                    </div>
-                    <div className="stat border">
-                      <div className="value">4,124</div>
-                      <div className="type">Views</div>
-                    </div>
-                    <div className="stat">
-                      <div className="value">32</div>
-                      <div className="type">Comments</div>
-                    </div>
-                  </div>
-                </CardWrapper>
+                <Link
+                  className="link"
+                  key={i}
+                  to={`/dashboard/recipe/${reci.id}`}
+                >
+                  <CardWrapper className="card">
+                    <RecipeCard reci={reci} key={reci.id} />
+                  </CardWrapper>
+                </Link>
               </CardContainer>
             </section>
           );

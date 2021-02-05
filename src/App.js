@@ -14,14 +14,12 @@ import AddRecipe from "./components/AddRecipe/AddRecipe";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Dashboard";
 import EditRecipe from "./components/EditRecipe";
-// import RecipeFeed from "./components/RecipeFeed";
 import EachRecipe from "./components/EachRecipe";
 
 const App = () => {
   return (
     <div>
       <Nav />
-
       <Switch>
         <Route path="/dashboard/recipe/edit/:id" component={EditRecipe} />
         <Route path="/dashboard/recipe/:id" component={EachRecipe} />

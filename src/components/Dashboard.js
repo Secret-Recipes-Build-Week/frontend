@@ -4,6 +4,7 @@ import { fetchUser, setUserInfo } from "../store/actions";
 import styled from "styled-components";
 import axiosWithAuth from "./../utils/axiosWithAuth";
 import Recipes from "./Recipes";
+import RecipeFeed from './RecipeFeed';
 // import AddRecipe from "./AddRecipe/AddRecipe";
 // import PrivateRoute from './PrivateRoute';
 
@@ -17,7 +18,7 @@ const FlexWrapper = styled.div`
   width: 70%;
   height: 100%;
   margin: 15rem auto;
-  section > div {
+  section {
     flex: 1 1 33.333333%;
     max-width: 20rem;
   }
@@ -48,6 +49,7 @@ const Dashboard = (props) => {
   return (
     <React.Fragment>
       <h1>Welcome</h1>
+      
       {/* user is able to see all the recipes 
       user can click on a recipe
       there user can edit/delete the specific recipe
@@ -67,6 +69,7 @@ const Dashboard = (props) => {
           return <AddRecipe {...props} asdf={"asdf"} />;
         }}
       /> */}
+      
     </React.Fragment>
   );
 };

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import image from "../images/bg.jpg"
+import {faEdit, faTrash} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RecipeWrapper = styled.div`
 padding: 1.5rem;
@@ -65,6 +67,10 @@ const paragraphStyleObject = {
   fontSize: "1.4rem"
 }
 
+const iconStyleObject = {
+  margin: "1rem 0.5rem",
+}
+
 function EachRecipe(props) {
   const { id } = useParams();
   const newID = parseInt(id);
@@ -80,6 +86,23 @@ function EachRecipe(props) {
   });
 
   console.log(recip);
+
+  const iconClick = (event) => {
+    console.log("This should be an axios call!")
+  }
+
+  const handleIconHover = (event) => {
+    event.target.style["color"] = "#49BF9D";
+    event.target.style["border-color"] = "#49BF9D";
+    event.target.style["background-color"] = "white";
+    event.target.style["cursor"] = "pointer";
+  };
+
+  const handleIconLeave = (event) => {
+    event.target.style["color"] = "black";
+    event.target.style["border-color"] = "black";
+    event.target.style["background-color"] = "#FFFFFF";
+  };
 
   return (
     <div>
@@ -119,8 +142,9 @@ function EachRecipe(props) {
           <p style={labelStyleObject}>This recipe is {r.private === 0 ? "Not Private" : "Private"}</p>
           <br />
 
-          <button>Edit</button>
-          <button>Delete</button>
+          <FontAwesomeIcon style={iconStyleObject} icon={faEdit} className="fa-2x" onClick={iconClick} onMouseOver={handleIconHover} onMouseOut={handleIconLeave}></FontAwesomeIcon>
+          <FontAwesomeIcon style={iconStyleObject} icon={faTrash} className="fa-2x" onClick={iconClick} onMouseOver={handleIconHover} onMouseOut={handleIconLeave}></FontAwesomeIcon>
+          <i class="fal fa-edit"></i>
           </div>
           
           

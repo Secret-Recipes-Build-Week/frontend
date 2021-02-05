@@ -3,6 +3,74 @@ import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { deleteRecipe } from "../store/actions";
+import styled from "styled-components";
+import image from "../images/bg.jpg";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const RecipeWrapper = styled.div`
+  padding: 1.5rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+const imgStyleObject = {
+  border: "2px dashed goldenrod",
+  display: "border-box",
+  width: "100%",
+};
+
+const headerStyleObject = {
+  fontSize: "2.5rem",
+  fontFamily: "Shadows Into Light, cursive",
+  fontWeight: "bold",
+  marginBottom: "0.5rem",
+};
+
+const cardLeftStyleObject = {
+  fontSize: "1rem",
+  padding: "1.5rem",
+  maxWidth: "33%",
+  overflow: "hidden",
+};
+
+const cardRightStyleObject = {
+  padding: "1.5rem",
+  width: "100%",
+  borderLeft: "2px dashed skyblue",
+};
+
+const sectionStyleObject = {
+  border: "2px dashed #49BF9D",
+  display: "flex",
+  width: "100%",
+};
+
+const labelStyleObject = {
+  fontSize: "1.6rem",
+  fontFamily: "Shadows Into Light, cursive",
+  backgroundColor: "tan",
+  display: "inline-block",
+  opacity: "80%",
+  marginTop: "1rem",
+  marginBottom: "0.5rem",
+  fontWeight: "bold",
+};
+
+const subHeaderStyleObject = {
+  fontFamily: "Parisienne, cursive",
+};
+
+const paragraphStyleObject = {
+  fontFamily: "Caveat, cursive",
+  fontSize: "1.4rem",
+};
+
+const iconStyleObject = {
+  margin: "1rem 0.5rem",
+};
 
 function EachRecipe(props) {
   const { push } = useHistory();
@@ -46,43 +114,88 @@ function EachRecipe(props) {
       });
   };
 
+  const handleIconHover = (event) => {
+    event.target.style["color"] = "#49BF9D";
+    event.target.style["border-color"] = "#49BF9D";
+    event.target.style["background-color"] = "white";
+    event.target.style["cursor"] = "pointer";
+  };
+
+  const handleIconLeave = (event) => {
+    event.target.style["color"] = "black";
+    event.target.style["border-color"] = "black";
+    event.target.style["background-color"] = "#FFFFFF";
+  };
+
   return (
     <div>
-      {recip.map((r, i) => (
-        <section key={i}>
-          <h1> Recipe Title: {r.title}</h1>
-          <br />
-          <p> Created by: {r.createdBy}</p>
-          <br />
-          <p>Categories:</p>
-          {r.categories.map((c, i) => (
-            <p key={i}>{c.category}</p>
-          ))}
-          <br />
-          <p>Ingredients:</p>
-          {r.ingredients.map((i) => (
-            <p key={i.id}>{i.name}</p>
-          ))}
-          <br />
-          <p>Instructions</p>
-          {r.instructions.map((i) => (
-            <p key={i.id}>{i.text}</p>
-          ))}
-          <br />
-          <p>Keywords:</p>
-          {r.keywords ? <p>{r.keywords}</p> : "You did not set any keywords"}
-          {/* <p>{r.keywords}</p> */}
-          <br />
-          <br />
-          <p>Private Recipe: {r.private === 0 ? "Not Private" : "Private"}</p>
-          <br />
-          <p> Source: {r.source}</p>
-        </section>
-      ))}
-      <button key={id} onClick={editClick}>
-        Edit
-      </button>
-      <button onClick={deleteHandler}>Delete</button>
+      <RecipeWrapper>
+        {recip.map((r, i) => (
+          <section style={sectionStyleObject} key={i}>
+            <div className="cardLeft" style={cardLeftStyleObject}>
+              <h1 style={headerStyleObject}> {r.title}</h1>
+              <p style={subHeaderStyleObject}> courtesy of {r.source},</p>
+              <p style={subHeaderStyleObject}>
+                {" "}
+                crafted with love by {r.createdBy}.
+              </p>
+              <br />
+              <img src={image} alt="meal" style={imgStyleObject}></img>
+            </div>
+
+            <div className="cardRight" style={cardRightStyleObject}>
+              <p style={labelStyleObject}>Categories</p>
+              {r.categories.map((c, i) => (
+                <p style={paragraphStyleObject} key={i}>
+                  {c.category}
+                </p>
+              ))}
+              <br />
+              <p style={labelStyleObject}>Ingredients</p>
+              {r.ingredients.map((i) => (
+                <p style={paragraphStyleObject} key={i.id}>
+                  {i.name}
+                </p>
+              ))}
+              <br />
+              <p style={labelStyleObject}>Instructions</p>
+              {r.instructions.map((i) => (
+                <p style={paragraphStyleObject} key={i.id}>
+                  {i.text}
+                </p>
+              ))}
+              <br />
+              <p style={labelStyleObject}>Keywords:</p>
+              <br />
+              {r.keywords ? r.keywords : "You did not set any keywords"}
+              <br />
+              <br />
+              <p style={labelStyleObject}>
+                This recipe is {r.private === 0 ? "Not Private" : "Private"}
+              </p>
+              <br />
+
+              <FontAwesomeIcon
+                style={iconStyleObject}
+                icon={faEdit}
+                className="fa-2x"
+                onClick={editClick}
+                onMouseOver={handleIconHover}
+                onMouseOut={handleIconLeave}
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                style={iconStyleObject}
+                icon={faTrash}
+                className="fa-2x"
+                onClick={deleteHandler}
+                onMouseOver={handleIconHover}
+                onMouseOut={handleIconLeave}
+              ></FontAwesomeIcon>
+              <i class="fal fa-edit"></i>
+            </div>
+          </section>
+        ))}
+      </RecipeWrapper>
     </div>
   );
 }

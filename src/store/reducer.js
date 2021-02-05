@@ -1,40 +1,39 @@
 import * as actionTypes from "./actions";
 
-// const initState = localStorage.getItem("token")
-//   ? {
-//       obect: [],
-//     }
-//   : {
+const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+
 const initState = {
-  userData: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    id: null,
-    uuid: "",
-    recipes: [
-      {
-        id: "",
-        title: "",
-        categories: ["", ""],
-        keywords: "summer, apple pie, mediterranean",
-        private: false,
-        // createdBy: `${this.firstName} ${this.lastName}`, //*changed 'userData' to 'this'. >>>created on backend?
-        source: "",
-        instructions: [
-          { step: 1, text: "Preheat oven to 400°" },
-          { step: 2, text: "Chop Vegetables" },
-        ],
-        ingredients: [
+  userData: userInLocalStorage
+    ? userInLocalStorage
+    : {
+        firstName: "",
+        lastName: "",
+        email: "",
+        id: null,
+        uuid: "",
+        recipes: [
           {
-            name: "Rice",
-            quantity: 3, //integer
-            unit: "cups", //cup, tablespoon
+            id: "",
+            title: "",
+            categories: ["", ""],
+            keywords: "summer, apple pie, mediterranean",
+            private: false,
+            // createdBy: `${this.firstName} ${this.lastName}`, //*changed 'userData' to 'this'.created on backend?
+            source: "",
+            instructions: [
+              { step: 1, text: "Preheat oven to 400°" },
+              { step: 2, text: "Chop Vegetables" },
+            ],
+            ingredients: [
+              {
+                name: "Rice",
+                quantity: 3, //integer
+                unit: "cups", //cup, tablespoon
+              },
+            ],
           },
         ],
       },
-    ],
-  },
   isLoggedIn: false,
   isLoading: false,
   error: "",
@@ -89,13 +88,13 @@ const reducer = (state = initState, action) => {
         error: false,
       };
     case actionTypes.DELETE_RECIPE:
-      return{
+      return {
         ...state,
         userData: {
           ...state.userData,
-          recipes: action.payload
-        }
-      }
+          recipes: action.payload,
+        },
+      };
     default:
       return state;
   }

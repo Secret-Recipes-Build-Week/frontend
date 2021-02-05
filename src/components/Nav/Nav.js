@@ -16,6 +16,7 @@ const Nav = (props) => {
 
   const signoutHandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     props.signOutUser();
     push("/");
   };

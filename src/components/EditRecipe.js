@@ -88,6 +88,7 @@ function EditRecipe(props) {
 
   // exit editing click
   const exitEdit = () => {
+    // push(`/dashboard/recipe/${id}`);
     push(`/dashboard`);
   };
 
@@ -121,7 +122,11 @@ function EditRecipe(props) {
         editRecipe.ingredients
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          ingredients: res.data,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -172,13 +177,18 @@ function EditRecipe(props) {
   // PUT Instruction
   const putInstructionSubmit = (e) => {
     e.preventDefault();
+    console.log(editRecipe.instructions);
     axiosWithAuth()
       .put(
-        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/${editRecipe.instructions[0].id}`,
-        editRecipe.instructions[0]
+        `https://familyrecipe-app-backend.herokuapp.com/api/instructions/`,
+        editRecipe.instructions
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setEditRecipe({
+          ...editRecipe,
+          instructions: res.data,
+        });
       })
       .catch((err) => {
         console.log(err);

@@ -84,7 +84,7 @@ function EditRecipe(props) {
       instructions: newInstructions,
     });
   };
-  // console.log(editRecipe);
+  console.log(editRecipe);
 
   // exit editing click
   const exitEdit = () => {
@@ -264,7 +264,7 @@ function EditRecipe(props) {
         {editRecipe.ingredients.map((ingre, i) => {
           return (
             <section key={i}>
-              <label htmlFor={i}>Ingredients{i + 1}</label>
+              <label htmlFor={i}>Ingredients {i + 1}: </label>
               <input
                 key={i}
                 id={i}
@@ -291,9 +291,9 @@ function EditRecipe(props) {
         {editRecipe.instructions.map((instruct, i) => {
           return (
             <section key={i}>
-              <label htmlFor={i}>Instructions {i + 1}:</label>
+              <label htmlFor={i}>Step {i + 1}: </label>
               <input
-                key={instruct.text}
+                key={i}
                 id={i}
                 type="text"
                 value={instruct.text}

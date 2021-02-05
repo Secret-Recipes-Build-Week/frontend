@@ -9,13 +9,10 @@ import { signOutUser } from "../../store/actions";
 const Nav = (props) => {
   const { push } = useHistory();
 
-  console.log(props);
-  //! if (props.isLoggedIn === false) {
-  //!   localStorage.removeItem("token");
-  //! }
 
   const signoutHandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     props.signOutUser();
     push("/");
   };

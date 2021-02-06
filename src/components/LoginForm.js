@@ -179,6 +179,11 @@ function LoginForm(props) {
           .get(`api/user/${res.data.id}`)
           .then((res) => {
             console.log(res.data);
+<<<<<<< HEAD
+=======
+            localStorage.setItem("user", JSON.stringify(res.data));
+            localStorage.setItem("isLoggedIn", "true");
+>>>>>>> main
             props.setUserInfo(res.data);
             push("/dashboard");
           })

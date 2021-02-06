@@ -22,7 +22,7 @@ const App = () => {
       <Nav />
       <Switch>
         <Route path="/dashboard/recipe/edit/:id" component={EditRecipe} />
-        <Route path="/dashboard/recipe/:id" component={EachRecipe} />
+        <PrivateRoute path="/dashboard/recipe/:id" component={EachRecipe} />
         <PrivateRoute path="/dashboard/add" component={AddRecipe} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/login" component={LoginForm} />

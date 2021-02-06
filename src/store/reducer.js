@@ -1,36 +1,41 @@
 import * as actionTypes from "./actions";
 
+const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn')
+
 const initState = {
-  userData: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    id: null,
-    uuid: "",
-    recipes: [
-      {
-        id: "",
-        title: "",
-        categories: ["", ""],
-        keywords: "summer, apple pie, mediterranean",
-        private: false,
-        // createdBy: `${this.firstName} ${this.lastName}`, //*changed 'userData' to 'this'. >>>created on backend?
-        source: "",
-        instructions: [
-          { step: 1, text: "Preheat oven to 400°" },
-          { step: 2, text: "Chop Vegetables" },
-        ],
-        ingredients: [
+  userData: userInLocalStorage
+    ? userInLocalStorage
+    : {
+        firstName: "",
+        lastName: "",
+        email: "",
+        id: null,
+        uuid: "",
+        recipes: [
           {
-            name: "Rice",
-            quantity: 3, //integer
-            unit: "cups", //cup, tablespoon
+            id: "",
+            title: "",
+            categories: ["", ""],
+            keywords: "summer, apple pie, mediterranean",
+            private: false,
+            // createdBy: `${this.firstName} ${this.lastName}`, //*changed 'userData' to 'this'.created on backend?
+            source: "",
+            instructions: [
+              { step: 1, text: "Preheat oven to 400°" },
+              { step: 2, text: "Chop Vegetables" },
+            ],
+            ingredients: [
+              {
+                name: "Rice",
+                quantity: 3, //integer
+                unit: "cups", //cup, tablespoon
+              },
+            ],
           },
         ],
       },
-    ],
-  },
-  isLoggedIn: false,
+  isLoggedIn: isLoggedInLocalStorage ? isLoggedInLocalStorage : false,
   isLoading: false,
   error: "",
 };
@@ -82,6 +87,14 @@ const reducer = (state = initState, action) => {
         isLoggedIn: true,
         isLoading: false,
         error: false,
+      };
+    case actionTypes.DELETE_RECIPE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          recipes: action.payload,
+        },
       };
     default:
       return state;

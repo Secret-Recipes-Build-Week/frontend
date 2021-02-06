@@ -30,7 +30,7 @@ const Dashboard = (props) => {
   const { id } = props.userData;
 
   useEffect(() => {
-    fetchUser();
+    // fetchUser();
     axiosWithAuth()
       .get(`api/user/${id}`)
       .then((res) => {

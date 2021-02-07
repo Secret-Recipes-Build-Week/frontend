@@ -47,6 +47,12 @@ table {
 	border-spacing: 0;
 }
 
+.image {
+	max-width: 100%;
+	overflow: hidden;
+	height: 12rem;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');

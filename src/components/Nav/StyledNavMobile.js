@@ -2,31 +2,33 @@ import styled from "styled-components";
 
 
 const StyledNavMobile = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   background-image: linear-gradient(to right, #49BF9D, white);
+  border: 2px solid blue;
   /* * {
     border: 1px solid tomato;
   } */
   .navItems {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     text-align: center;
     margin: 1rem 0rem;
+    border: 2px solid red;
   }
 
   a {
-    margin: 0.5rem 0.5rem;
-    padding: 0rem 0.5rem;
+    margin: 0.3rem 0.3rem;
+    padding: 0rem 0.3rem;
     text-decoration: none;
-    display: flex;
+    display: inline-block;
     flex-grow: 1;
     color: black;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-family: 'Permanent Marker', cursive;
-    border: 4px solid black;
+    border: 2px solid black;
     border-radius: 10%;
     :hover {
       color: #ffffff;

@@ -49,7 +49,6 @@ const Nav = (props) => {
       {isMobile && 
         <StyledNavMobile >
           <div className="navItems">{navItems}</div>
-          <div className="logo">Family Cookbook</div>
         </StyledNavMobile>}
       {isDesktop && 
           <StyledNav>

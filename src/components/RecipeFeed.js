@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Recipes from "./Recipes";
 import RecipePreview from "./RecipePreview";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDoubleRight,
-  faAngleDoubleLeft,
-} from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faAngleDoubleRight,
+//   faAngleDoubleLeft,
+// } from "@fortawesome/free-solid-svg-icons";
 
 const RecipeFeedWrapper = styled.div`
   .slider {
@@ -91,13 +89,13 @@ export default function RecipeFeed() {
 
   let slideArray = [<RecipePreview />];
 
-  const [x, setX] = useState(0);
-  const goLeft = () => {
-    x === 0 ? setX(-100 * (slideArray.length - 1)) : setX(x + 100);
-  };
-  const goRight = () => {
-    x === -100 * (slideArray.length - 1) ? setX(0) : setX(x - 100);
-  };
+  // const [x, setX] = useState(0);
+  // const goLeft = () => {
+  //   x === 0 ? setX(-100 * (slideArray.length - 1)) : setX(x + 100);
+  // };
+  // const goRight = () => {
+  //   x === -100 * (slideArray.length - 1) ? setX(0) : setX(x - 100);
+  // };
 
   return (
     <div className="RecipeFeedDiv">
@@ -109,7 +107,7 @@ export default function RecipeFeed() {
                 id="flexWrapper"
                 key={index}
                 className="slide"
-                style={{ transform: `translateX(${x}%)` }}
+                // style={{ transform: `translateX(${x}%)` }}
               >
                 {item}
               </div>

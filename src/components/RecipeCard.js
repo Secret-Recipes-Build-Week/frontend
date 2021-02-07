@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function RecipeCard(props) {
-  console.log(props);
   const { reci } = props;
 
   function randomNumber() {

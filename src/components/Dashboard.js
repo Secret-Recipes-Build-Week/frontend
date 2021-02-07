@@ -4,7 +4,7 @@ import { fetchUser, setUserInfo } from "../store/actions";
 import styled from "styled-components";
 import axiosWithAuth from "./../utils/axiosWithAuth";
 import Recipes from "./Recipes";
-import RecipeFeed from './RecipeFeed';
+
 // import AddRecipe from "./AddRecipe/AddRecipe";
 // import PrivateRoute from './PrivateRoute';
 
@@ -17,7 +17,7 @@ const FlexWrapper = styled.div`
   gap: 5rem;
   width: 70%;
   height: 100%;
-  margin: 15rem auto;
+  margin: 5rem auto;
   section {
     flex: 1 1 33.333333%;
     max-width: 20rem;

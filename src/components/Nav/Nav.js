@@ -1,5 +1,6 @@
 import React from "react";
 import StyledNav from "./StyledNav";
+import StyledNavMobile from "./StyledNavMobile"
 import { NavLink, useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
@@ -45,11 +46,15 @@ const Nav = (props) => {
 
   return (
     <div>
-      {isMobile && <h1>Dis a Mobile Page Beeitch.</h1>}
+      {isMobile && 
+        <StyledNavMobile >
+          <div className="navItems">{navItems}</div>
+          <div className="logo">Family Cookbook</div>
+        </StyledNavMobile>}
       {isDesktop && 
           <StyledNav>
-          <div className="logo">Family Cookbook</div>
-          <div className="navItems">{navItems}</div>
+            <div className="logo">Family Cookbook</div>
+            <div className="navItems">{navItems}</div>
         </StyledNav>
       }
     </div>

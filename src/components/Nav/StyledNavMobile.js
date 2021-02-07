@@ -6,7 +6,6 @@ const StyledNavMobile = styled.div`
   display: flex;
   flex-direction: row-reverse;
   background-image: linear-gradient(to right, #49BF9D, white);
-  border: 2px solid blue;
   /* * {
     border: 1px solid tomato;
   } */
@@ -16,7 +15,6 @@ const StyledNavMobile = styled.div`
     align-items: center;
     text-align: center;
     margin: 1rem 0rem;
-    border: 2px solid red;
   }
 
   a {

@@ -1,6 +1,7 @@
 import React from "react";
 import StyledNav from "./StyledNav";
 import { NavLink, useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 //redux
 import { connect } from "react-redux";
@@ -8,11 +9,6 @@ import { signOutUser } from "../../store/actions";
 
 const Nav = (props) => {
   const { push } = useHistory();
-
-  console.log(props);
-  //! if (props.isLoggedIn === false) {
-  //!   localStorage.removeItem("token");
-  //! }
 
   const signoutHandler = () => {
     localStorage.removeItem("token");
@@ -22,6 +18,13 @@ const Nav = (props) => {
     props.signOutUser();
     push("/");
   };
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 500px)'
+  })
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 500px)'
+  })
 
       const navItems = props.isLoggedIn ? (
       <div>
@@ -41,10 +44,15 @@ const Nav = (props) => {
     );
 
   return (
-    <StyledNav>
-      <div className="logo">Family Cookbook</div>
-      <div className="navItems">{navItems}</div>
-    </StyledNav>
+    <div>
+      {isMobile && <h1>Dis a Mobile Page Beeitch.</h1>}
+      {isDesktop && 
+          <StyledNav>
+          <div className="logo">Family Cookbook</div>
+          <div className="navItems">{navItems}</div>
+        </StyledNav>
+      }
+    </div>
   );
 };
 

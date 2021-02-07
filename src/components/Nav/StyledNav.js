@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MediaQuery from "react-responsive";
 
 const StyledNav = styled.div`
   display: flex;

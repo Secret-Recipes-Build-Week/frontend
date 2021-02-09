@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import LoginFormMobileWrapper from "./LoginFormMobile"
+import LoginFormMobileWrapper from "./LoginFormMobile";
 import * as yup from "yup";
 import schema from "../validation/loginFormSchema";
 import axios from "axios";
@@ -31,8 +31,8 @@ const formDivStyleObjectMobile = {
   padding: "1rem",
   width: "100%",
   flexDirection: "column",
-  alignItems: "center"
-}
+  alignItems: "center",
+};
 
 const imgStyleObject = {
   height: "30%",
@@ -93,15 +93,12 @@ const inputStyleObject = {
   fontColor: "#FFFFFF",
 };
 
-
 // const checkboxStyleObject = {
 //   textAlign: "center",
 //   margin: "1rem",
 //   padding: "0.2rem",
 //   fontWeight: "bold",
 // };
-
-
 
 // ** COMPONENT LOGIC BEGINS HERE **//
 
@@ -127,11 +124,11 @@ function LoginForm(props) {
   const { push } = useHistory();
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 500px)'
-  })
+    query: "(max-width: 500px)",
+  });
   const isDesktop = useMediaQuery({
-    query: '(min-width: 500px)'
-  })
+    query: "(min-width: 500px)",
+  });
 
   const handleButtonClick = (event) => {
     event.target.style["background-color"] = "#49BF9D";
@@ -249,55 +246,55 @@ function LoginForm(props) {
 
   return (
     <div>
-      {isDesktop &&
-    <div className="shell" style={shellStyleObject}>
-      <img alt="a delicious meal" src={image} style={imgStyleObject}></img>
-      <FormWrapper>
-        <div className="form" style={formDivStyleObject}>
-          <form onSubmit={onSubmit}>
-            <FormHeaderWrapper>
-              <h1>Family Secrets: Login</h1>
-            </FormHeaderWrapper>
+      {isDesktop && (
+        <div className="shell" style={shellStyleObject}>
+          <img alt="a delicious meal" src={image} style={imgStyleObject}></img>
+          <FormWrapper>
+            <div className="form" style={formDivStyleObject}>
+              <form onSubmit={onSubmit}>
+                <FormHeaderWrapper>
+                  <h1>Family Secrets: Login</h1>
+                </FormHeaderWrapper>
 
-            <div className="errors">
-              <div className="error">{errorValues.name}</div>
-              <div className="error">{errorValues.size}</div>
-              <div className="error">{errorValues.email}</div>
-            </div>
+                <div className="errors">
+                  <div className="error">{errorValues.name}</div>
+                  <div className="error">{errorValues.size}</div>
+                  <div className="error">{errorValues.email}</div>
+                </div>
 
-            <FormLabelWrapper>
-              <label className="label" style={labelStyleObject}>
-                {" "}
-                E-mail:
-                <input
-                  style={inputStyleObject}
-                  type="email"
-                  onChange={onChange}
-                  name="email"
-                  value={formValues.email}
-                  onMouseEnter={handleInputHover}
-                  onMouseLeave={handleInputLeave}
-                />
-              </label>
-            </FormLabelWrapper>
+                <FormLabelWrapper>
+                  <label className="label" style={labelStyleObject}>
+                    {" "}
+                    E-mail:
+                    <input
+                      style={inputStyleObject}
+                      type="email"
+                      onChange={onChange}
+                      name="email"
+                      value={formValues.email}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                    />
+                  </label>
+                </FormLabelWrapper>
 
-            <FormLabelWrapper>
-              <label className="label" style={labelStyleObject}>
-                {" "}
-                Password:
-                <input
-                  style={inputStyleObject}
-                  type="password"
-                  onChange={onChange}
-                  name="password"
-                  value={formValues.password}
-                  onMouseEnter={handleInputHover}
-                  onMouseLeave={handleInputLeave}
-                />
-              </label>
-            </FormLabelWrapper>
+                <FormLabelWrapper>
+                  <label className="label" style={labelStyleObject}>
+                    {" "}
+                    Password:
+                    <input
+                      style={inputStyleObject}
+                      type="password"
+                      onChange={onChange}
+                      name="password"
+                      value={formValues.password}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                    />
+                  </label>
+                </FormLabelWrapper>
 
-            {/* <label className="label" style={checkboxStyleObject}>
+                {/* <label className="label" style={checkboxStyleObject}>
             {" "}
             remember me
             <input
@@ -309,71 +306,72 @@ function LoginForm(props) {
             />
           </label> */}
 
-            <button
-              style={toggle ? buttonHoverStyleObject : buttonStyleObject}
-              onMouseEnter={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
-              onClick={handleButtonClick}
-              className="submit"
-              disabled={disabled}
-            >
-              submit
-            </button>
-          </form>
-        </div>
-      </FormWrapper>
-    </div>}
-    {isMobile && 
-    <div>
-      <div className="image">
-        <img src={image} alt="Yum"></img>
-      </div>
-      <LoginFormMobileWrapper>
-      <div className="form" style={formDivStyleObjectMobile}>
-          <form onSubmit={onSubmit}>
-            <FormHeaderWrapper>
-              <h1>Family Secrets: Login</h1>
-            </FormHeaderWrapper>
-
-            <div className="errors">
-              <div className="error">{errorValues.name}</div>
-              <div className="error">{errorValues.size}</div>
-              <div className="error">{errorValues.email}</div>
+                <button
+                  style={toggle ? buttonHoverStyleObject : buttonStyleObject}
+                  onMouseEnter={handleButtonHover}
+                  onMouseLeave={handleButtonLeave}
+                  onClick={handleButtonClick}
+                  className="submit"
+                  disabled={disabled}
+                >
+                  submit
+                </button>
+              </form>
             </div>
+          </FormWrapper>
+        </div>
+      )}
+      {isMobile && (
+        <div>
+          <div className="image">
+            <img src={image} alt="Yum"></img>
+          </div>
+          <LoginFormMobileWrapper>
+            <div className="form" style={formDivStyleObjectMobile}>
+              <form onSubmit={onSubmit}>
+                <FormHeaderWrapper>
+                  <h1>Family Secrets: Login</h1>
+                </FormHeaderWrapper>
 
-            <FormLabelWrapper>
-              <label className="label" style={labelStyleObject}>
-                {" "}
-                E-mail:
-                <input
-                  style={inputStyleObject}
-                  type="email"
-                  onChange={onChange}
-                  name="email"
-                  value={formValues.email}
-                  onMouseEnter={handleInputHover}
-                  onMouseLeave={handleInputLeave}
-                />
-              </label>
-            </FormLabelWrapper>
+                <div className="errors">
+                  <div className="error">{errorValues.name}</div>
+                  <div className="error">{errorValues.size}</div>
+                  <div className="error">{errorValues.email}</div>
+                </div>
 
-            <FormLabelWrapper>
-              <label className="label" style={labelStyleObject}>
-                {" "}
-                Password:
-                <input
-                  style={inputStyleObject}
-                  type="password"
-                  onChange={onChange}
-                  name="password"
-                  value={formValues.password}
-                  onMouseEnter={handleInputHover}
-                  onMouseLeave={handleInputLeave}
-                />
-              </label>
-            </FormLabelWrapper>
+                <FormLabelWrapper>
+                  <label className="label" style={labelStyleObject}>
+                    {" "}
+                    E-mail:
+                    <input
+                      style={inputStyleObject}
+                      type="email"
+                      onChange={onChange}
+                      name="email"
+                      value={formValues.email}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                    />
+                  </label>
+                </FormLabelWrapper>
 
-            {/* <label className="label" style={checkboxStyleObject}>
+                <FormLabelWrapper>
+                  <label className="label" style={labelStyleObject}>
+                    {" "}
+                    Password:
+                    <input
+                      style={inputStyleObject}
+                      type="password"
+                      onChange={onChange}
+                      name="password"
+                      value={formValues.password}
+                      onMouseEnter={handleInputHover}
+                      onMouseLeave={handleInputLeave}
+                    />
+                  </label>
+                </FormLabelWrapper>
+
+                {/* <label className="label" style={checkboxStyleObject}>
             {" "}
             remember me
             <input
@@ -385,21 +383,22 @@ function LoginForm(props) {
             />
           </label> */}
 
-            <button
-              style={toggle ? buttonHoverStyleObject : buttonStyleObject}
-              onMouseEnter={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
-              onClick={handleButtonClick}
-              className="submit"
-              disabled={disabled}
-            >
-              submit
-            </button>
-          </form>
+                <button
+                  style={toggle ? buttonHoverStyleObject : buttonStyleObject}
+                  onMouseEnter={handleButtonHover}
+                  onMouseLeave={handleButtonLeave}
+                  onClick={handleButtonClick}
+                  className="submit"
+                  disabled={disabled}
+                >
+                  submit
+                </button>
+              </form>
+            </div>
+          </LoginFormMobileWrapper>
         </div>
-      </LoginFormMobileWrapper>
-    </div>}
-  </div>
+      )}
+    </div>
   );
 }
 

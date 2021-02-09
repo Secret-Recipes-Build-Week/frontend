@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import RecipeCard from "./RecipeCard";
+import axios from "axios";
 
 //Styles//
 const CardContainer = styled.div`
@@ -133,24 +133,29 @@ const CardWrapper = styled.div`
   }
 `;
 
-function Recipes(props) {
+export default function RecipePreview() {
   // console.log(props);
-  const { userData } = props;
-  const [recipe] = useState(userData.recipes);
-  // console.log(recipe);
+  const [recipePreview, setRecipePreview] = useState();
+
+  useEffect(() => {
+    axios
+      .get("https://familyrecipe-app-backend.herokuapp.com/api/preview")
+      .then((res) => {
+        setRecipePreview(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <React.Fragment>
-      {recipe &&
-        recipe.map((reci, i) => {
+      {recipePreview &&
+        recipePreview.map((reci, i) => {
           return (
             <section key={i}>
               <CardContainer>
-                <Link
-                  className="link"
-                  key={i}
-                  to={`/dashboard/recipe/${reci.id}`}
-                >
+                <Link className="link" key={i} to={`/dashboard/signup`}>
                   <CardWrapper className="card">
                     <RecipeCard reci={reci} key={reci.id} />
                   </CardWrapper>
@@ -162,14 +167,3 @@ function Recipes(props) {
     </React.Fragment>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    ...state,
-    id: state.userData.id,
-    firstName: state.userData.firstName,
-    error: state.error,
-    isLoading: state.isLoading,
-  };
-};
-
-export default connect(mapStateToProps)(Recipes);

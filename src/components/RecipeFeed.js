@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import RecipePreview from "./RecipePreview";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -74,19 +74,6 @@ const RecipeFeedWrapper = styled.div`
 `;
 
 export default function RecipeFeed() {
-  const [recipePreview, setRecipePreview] = useState();
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://familyrecipe-app-backend.herokuapp.com/api/preview")
-  //     .then((res) => {
-  //       setRecipePreview(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   let slideArray = [<RecipePreview />];
 
   // const [x, setX] = useState(0);

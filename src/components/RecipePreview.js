@@ -148,9 +148,6 @@ export default function RecipePreview() {
       });
   }, []);
 
-  const [reci] = useState(recipePreview);
-  // console.log(recipe);
-
   return (
     <React.Fragment>
       {recipePreview &&

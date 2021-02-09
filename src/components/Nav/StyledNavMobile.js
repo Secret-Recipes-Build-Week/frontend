@@ -1,26 +1,30 @@
 import styled from "styled-components";
 
-const StyledNav = styled.div`
+
+const StyledNavMobile = styled.div`
+  width: 100%;
   display: flex;
-  text-align: center;
+  flex-direction: row-reverse;
   background-image: linear-gradient(to right, #49BF9D, white);
   /* * {
     border: 1px solid tomato;
   } */
   .navItems {
-    width: 80%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     text-align: center;
+    margin: 1rem 0rem;
   }
 
   a {
-    margin: 0rem 1rem;
-    padding: 0rem 1rem;
+    margin: 0.3rem 0.3rem;
+    padding: 0rem 0.3rem;
     text-decoration: none;
+    display: inline-block;
+    flex-grow: 1;
     color: black;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-family: 'Permanent Marker', cursive;
     border: 2px solid black;
     border-radius: 10%;
@@ -31,10 +35,9 @@ const StyledNav = styled.div`
   }
 
   .logo {
-    width: 10%;
+    display: none;
     text-align: center;
     margin-left: 5%;
-    margin-right: 5%;
     margin-top: 1%;
     margin-bottom: 1%;
     font-size: 1.6rem;
@@ -48,4 +51,4 @@ const StyledNav = styled.div`
   }
 
 `;
-export default StyledNav;
+export default StyledNavMobile;
